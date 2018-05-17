@@ -4,12 +4,14 @@ import br.ifmg.edu.trabalho_java_avancado.modelo.Funcionario;
 import br.ifmg.edu.trabalho_java_avancado.modelo.VendaProduto;
 import br.ifmg.edu.trabalho_java_avancado.service.VendaService;
 import br.ifmg.edu.trabalho_java_avancado.visao.Vendas.itens.ItensVendaTableModel;
+import br.ifmg.edu.trabalho_java_avancado.visao.Vendas.itens.VendaProdutoEdita;
 import br.ifmg.edu.trabalho_java_avancado.visao.Vendas.itens.VendaProdutoInclui;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -61,7 +63,7 @@ public class CadastroVendasInclui extends javax.swing.JDialog {
         jBtnEditar = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTableVendaProd = new javax.swing.JTable();
         jPanel4 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jFmtData = new javax.swing.JFormattedTextField();
@@ -140,13 +142,18 @@ public class CadastroVendasInclui extends javax.swing.JDialog {
         jBtnEditar.setFocusable(false);
         jBtnEditar.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         jBtnEditar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jBtnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnEditarActionPerformed(evt);
+            }
+        });
         jToolBar1.add(jBtnEditar);
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Produtos"));
 
         jScrollPane1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTableVendaProd.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -157,7 +164,7 @@ public class CadastroVendasInclui extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jTableVendaProd);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -287,7 +294,7 @@ public class CadastroVendasInclui extends javax.swing.JDialog {
     }//GEN-LAST:event_jBtnFecharActionPerformed
 
     private void jBtnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnRemoverActionPerformed
-        itens.remove(jTable1.getSelectedRow());
+        itens.remove(jTableVendaProd.getSelectedRow());
         atualizaDados();
     }//GEN-LAST:event_jBtnRemoverActionPerformed
 
@@ -296,6 +303,19 @@ public class CadastroVendasInclui extends javax.swing.JDialog {
         dialog.setVisible(true);
         atualizaDados();
     }//GEN-LAST:event_jBtnIncluirActionPerformed
+
+    private void jBtnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnEditarActionPerformed
+        if(jTableVendaProd.getSelectedRow() == -1){
+            JOptionPane.showMessageDialog(this, 
+                    "Por favor, selecione um registro");            
+            return;
+        }
+        
+        VendaProduto v = itens.get(jTableVendaProd.getSelectedRow());
+        VendaProdutoEdita dialog = new VendaProdutoEdita(this, true, v);
+        dialog.setVisible(true);
+        atualizaDados();
+    }//GEN-LAST:event_jBtnEditarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -353,7 +373,7 @@ public class CadastroVendasInclui extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTableVendaProd;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JTextField jTxtValor;
     private javax.swing.JTextField jTxtVendedor;
@@ -361,6 +381,6 @@ public class CadastroVendasInclui extends javax.swing.JDialog {
 
     private void atualizaDados() {
         ivTableModel = new ItensVendaTableModel(itens);
-        jTable1.setModel(ivTableModel);
+        jTableVendaProd.setModel(ivTableModel);
     }
 }
