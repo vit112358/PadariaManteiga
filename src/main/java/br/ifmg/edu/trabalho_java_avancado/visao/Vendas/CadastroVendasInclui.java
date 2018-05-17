@@ -315,6 +315,7 @@ public class CadastroVendasInclui extends javax.swing.JDialog {
         VendaProdutoEdita dialog = new VendaProdutoEdita(this, true, v);
         dialog.setVisible(true);
         atualizaDados();
+        
     }//GEN-LAST:event_jBtnEditarActionPerformed
 
     /**
