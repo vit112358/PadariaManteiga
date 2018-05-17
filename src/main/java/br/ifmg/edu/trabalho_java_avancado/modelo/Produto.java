@@ -26,20 +26,21 @@ public abstract class Produto implements Serializable {
     
     @NotNull
     private String Nome;
+    
+    private Float precoCusto;
+    private Float precoVenda;
+    
+    private Integer Estoque;
+    private Integer EstoqueMin;
 
     public Produto() {
     }
 
-    public Produto(Integer Id, String Nome) {
-        this.Id = Id;
-        this.Nome = Nome;
-    }
-
-    public Integer getID() {
+    public Integer getId() {
         return Id;
     }
 
-    public void setID(Integer Id) {
+    public void setId(Integer Id) {
         this.Id = Id;
     }
 
@@ -51,11 +52,42 @@ public abstract class Produto implements Serializable {
         this.Nome = Nome;
     }
 
+    public Float getPrecoCusto() {
+        return precoCusto;
+    }
+
+    public void setPrecoCusto(Float precoCusto) {
+        this.precoCusto = precoCusto;
+    }
+
+    public Float getPrecoVenda() {
+        return precoVenda;
+    }
+
+    public void setPrecoVenda(Float precoVenda) {
+        this.precoVenda = precoVenda;
+    }
+
+    public Integer getEstoque() {
+        return Estoque;
+    }
+
+    public void setEstoque(Integer Estoque) {
+        this.Estoque = Estoque;
+    }
+
+    public Integer getEstoqueMin() {
+        return EstoqueMin;
+    }
+
+    public void setEstoqueMin(Integer EstoqueMin) {
+        this.EstoqueMin = EstoqueMin;
+    }
+
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 79 * hash + Objects.hashCode(this.Id);
-        hash = 79 * hash + Objects.hashCode(this.Nome);
+        hash = 37 * hash + Objects.hashCode(this.Id);
         return hash;
     }
 
@@ -79,8 +111,7 @@ public abstract class Produto implements Serializable {
 
     @Override
     public String toString() {
-        return "Produtos{" + "Id=" + Id + ", Nome=" + Nome + '}';
+        return "Produto{" + "Id=" + Id + ", Nome=" + Nome + ", precoCusto=" + precoCusto + ", precoVenda=" + precoVenda + ", Estoque=" + Estoque + ", EstoqueMin=" + EstoqueMin + '}';
     }
-    
     
 }

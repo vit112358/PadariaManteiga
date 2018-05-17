@@ -35,7 +35,7 @@ public class ProdTercTableModel extends AbstractTableModel{
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         switch (columnIndex){
-            case 0 : return prods.get(rowIndex).getID();
+            case 0 : return prods.get(rowIndex).getId();
             case 1 : return prods.get(rowIndex).getNome();
             case 2 : return prods.get(rowIndex).getPrecoCusto();
             case 3 : return prods.get(rowIndex).getPrecoVenda();
@@ -51,7 +51,7 @@ public class ProdTercTableModel extends AbstractTableModel{
             return;
         
         switch (columnIndex){
-            case 0 : prods.get(rowIndex).setID((Integer)aValue);break;
+            case 0 : prods.get(rowIndex).setId((Integer)aValue);break;
             case 1 : prods.get(rowIndex).setNome((String)aValue);break;
             case 2 : prods.get(rowIndex).setPrecoCusto((Float)aValue);break;
             case 3 : prods.get(rowIndex).setPrecoVenda((Float)aValue);break;

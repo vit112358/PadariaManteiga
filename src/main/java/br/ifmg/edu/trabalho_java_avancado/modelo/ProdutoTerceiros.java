@@ -15,19 +15,11 @@ import javax.persistence.ManyToOne;
  *
  * @author Vitor
  */
-
 @Entity
 @DiscriminatorValue("Produtos_Terceiros")
-public class ProdutoTerceiros extends Produto{
-    
-    private Float precoCusto;
-    private Float precoVenda;
-    
-    private Integer Estoque;
-    private Integer EstoqueMin;
-    
+public class ProdutoTerceiros extends Produto {
+
     //Verificar colocar Estoque
-    
     @ManyToOne
     @JoinColumn(name = "Fornecedor_Id")
     private Fornecedor fornecedor_prod;
@@ -35,44 +27,9 @@ public class ProdutoTerceiros extends Produto{
     public ProdutoTerceiros() {
     }
 
-    public ProdutoTerceiros(Float precoCusto, Float precoVenda, Integer Id, String Nome, Integer estoque, Integer estoqueMin) {
-        super(Id, Nome);
-        this.precoCusto = precoCusto;
-        this.precoVenda = precoVenda;
-        this.Estoque = estoque;
-        this.EstoqueMin = estoqueMin;
-    }
-
-    public Float getPrecoCusto() {
-        return precoCusto;
-    }
-
-    public void setPrecoCusto(Float precoCusto) {
-        this.precoCusto = precoCusto;
-    }
-
-    public Float getPrecoVenda() {
-        return precoVenda;
-    }
-
-    public void setPrecoVenda(Float precoVenda) {
-        this.precoVenda = precoVenda;
-    }
-
-    public Integer getEstoque() {
-        return Estoque;
-    }
-
-    public void setEstoque(Integer Estoque) {
-        this.Estoque = Estoque;
-    }
-
-    public Integer getEstoqueMin() {
-        return EstoqueMin;
-    }
-
-    public void setEstoqueMin(Integer EstoqueMin) {
-        this.EstoqueMin = EstoqueMin;
+    public ProdutoTerceiros(Fornecedor fornecedor_prod) {
+        super();
+        this.fornecedor_prod = fornecedor_prod;
     }
 
     
@@ -83,11 +40,11 @@ public class ProdutoTerceiros extends Produto{
     public void setFornecedor(Fornecedor fornecedor) {
         this.fornecedor_prod = fornecedor;
     }
-    
-       
+
     @Override
     public String toString() {
-        return "Produtos_Terceiros{" +"ID: "+ super.getID()+ " precoCusto=" + precoCusto + ", precoVenda=" + precoVenda + '}';
+        return super.getNome();
     }
 
+    
 }

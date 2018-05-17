@@ -20,7 +20,7 @@ public class ProdutosProduzidosDAO {
     }
     
     public void remover(ProdutoProduzido p){
-        ProdutoProduzido aux = em.find(ProdutoProduzido.class,p.getID());
+        ProdutoProduzido aux = em.find(ProdutoProduzido.class,p.getId());
         em.getTransaction().begin();
         em.remove(aux);
         em.getTransaction().commit();        

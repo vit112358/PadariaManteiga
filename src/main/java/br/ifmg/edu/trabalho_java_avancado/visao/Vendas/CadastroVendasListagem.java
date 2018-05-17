@@ -1,6 +1,8 @@
 package br.ifmg.edu.trabalho_java_avancado.visao.Vendas;
 
+import br.ifmg.edu.trabalho_java_avancado.modelo.Funcionario;
 import br.ifmg.edu.trabalho_java_avancado.modelo.Venda;
+import br.ifmg.edu.trabalho_java_avancado.modelo.Vendedor;
 import br.ifmg.edu.trabalho_java_avancado.service.VendaService;
 import br.ifmg.edu.trabalho_java_avancado.util.NegocioException;
 import java.util.List;
@@ -18,11 +20,14 @@ public class CadastroVendasListagem extends javax.swing.JDialog {
     
     private final VendaService vService = new VendaService();
     private List<Venda> vendas;
+    private Funcionario vendedor;
     private VendaTableModel vTabModel;
     
-    public CadastroVendasListagem(java.awt.Frame parent, boolean modal) {
+    public CadastroVendasListagem(java.awt.Frame parent, boolean modal, Funcionario v) {
         super(parent,modal);
         initComponents();
+        
+        this.vendedor = v;
         
         atualizaDados();
     }
@@ -163,9 +168,9 @@ public class CadastroVendasListagem extends javax.swing.JDialog {
 
     private void jBtnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirActionPerformed
         // TODO add your handling code here:
-        //CadastroVendedorInclui dialog = new CadastroVendedorInclui(this, true, vService);
-        //dialog.setVisible(true);
-        //atualizaDados();
+        CadastroVendasInclui dialog = new CadastroVendasInclui(this, true,vendedor,vService);
+        dialog.setVisible(true);
+        atualizaDados();
     }//GEN-LAST:event_jBtnIncluirActionPerformed
 
     private void jBtnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnEditarActionPerformed
@@ -208,7 +213,7 @@ public class CadastroVendasListagem extends javax.swing.JDialog {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    /*public static void main(String args[]) {
         
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -231,7 +236,7 @@ public class CadastroVendasListagem extends javax.swing.JDialog {
         //</editor-fold>
         //</editor-fold>
 
-        /* Create and display the form */
+        
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 CadastroVendasListagem dialog = new CadastroVendasListagem(new javax.swing.JFrame(), true);
@@ -244,7 +249,7 @@ public class CadastroVendasListagem extends javax.swing.JDialog {
                 dialog.setVisible(true);
             }
         });
-    }
+    }*/
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnAtualizar;

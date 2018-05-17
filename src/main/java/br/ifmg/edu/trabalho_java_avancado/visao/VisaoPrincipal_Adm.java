@@ -242,7 +242,7 @@ public class VisaoPrincipal_Adm extends javax.swing.JFrame {
 
     private void jSubMenuVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSubMenuVendaActionPerformed
         // TODO add your handling code here:
-        CadastroVendasListagem dialog = new CadastroVendasListagem(this, true);
+        CadastroVendasListagem dialog = new CadastroVendasListagem(this, true, a);
         dialog.setVisible(true);
     }//GEN-LAST:event_jSubMenuVendaActionPerformed
 

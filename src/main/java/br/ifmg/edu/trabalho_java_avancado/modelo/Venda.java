@@ -32,7 +32,7 @@ public class Venda implements Serializable {
     
     @ManyToOne
     @JoinColumn(name = "codVendedor")
-    private Vendedor vendedor;
+    private Funcionario vendedor;
     
     @Temporal(TemporalType.DATE)
     private Date DataVenda;
@@ -41,11 +41,11 @@ public class Venda implements Serializable {
     public Venda() {
     }
 
-    public Vendedor getVendedor() {
+    public Funcionario getVendedor() {
         return vendedor;
     }
 
-    public void setVendedor(Vendedor vendedor) {
+    public void setVendedor(Funcionario vendedor) {
         this.vendedor = vendedor;
     }
 

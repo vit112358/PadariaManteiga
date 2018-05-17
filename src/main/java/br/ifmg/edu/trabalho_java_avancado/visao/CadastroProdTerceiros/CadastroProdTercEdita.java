@@ -41,6 +41,7 @@ public class CadastroProdTercEdita extends javax.swing.JDialog {
         jTxtPrecoVenda.setText(String.valueOf(p.getPrecoVenda()));
         jTxtEstoque.setText(String.valueOf(p.getEstoque()));
         jTxtEstoqueMin.setText(String.valueOf(p.getEstoqueMin()));
+        jCbxFornecedores.setSelectedItem(p.getFornecedor());
     }
 
     /**
@@ -245,6 +246,7 @@ public class CadastroProdTercEdita extends javax.swing.JDialog {
         
         try {
             PTService.salvar(prodTerc);
+            setVisible(false);
         } catch (NegocioException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
