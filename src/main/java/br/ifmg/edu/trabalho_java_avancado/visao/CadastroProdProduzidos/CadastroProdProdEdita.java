@@ -296,6 +296,7 @@ public class CadastroProdProdEdita extends javax.swing.JDialog {
     private void jBtnFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnFecharActionPerformed
         // TODO add your handling code here:
         setVisible(false);
+        
     }//GEN-LAST:event_jBtnFecharActionPerformed
 
     private void jBtnSalvaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSalvaActionPerformed
