@@ -183,9 +183,9 @@ public class CadastroVendasListagem extends javax.swing.JDialog {
         
         Venda v = vendas.get(jTableFunc.getSelectedRow());
         
-        //CadastroVendedorEdita dialog = new CadastroVendedorEdita(this, true, vService, v);
-        //dialog.setVisible(true);
-        //atualizaDados();
+        CadastroVendasEdita dialog = new CadastroVendasEdita(this, true, v ,vService);
+        dialog.setVisible(true);
+        atualizaDados();
     }//GEN-LAST:event_jBtnEditarActionPerformed
 
     private void jBtnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnRemoverActionPerformed

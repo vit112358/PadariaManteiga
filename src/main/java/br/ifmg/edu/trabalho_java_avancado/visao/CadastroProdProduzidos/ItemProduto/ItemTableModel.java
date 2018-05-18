@@ -1,4 +1,4 @@
-package br.ifmg.edu.trabalho_java_avancado.visao.CadastroProdProduzidos;
+package br.ifmg.edu.trabalho_java_avancado.visao.CadastroProdProduzidos.ItemProduto;
 
 import br.ifmg.edu.trabalho_java_avancado.modelo.Itens;
 import br.ifmg.edu.trabalho_java_avancado.modelo.Materia_Prima;

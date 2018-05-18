@@ -15,9 +15,9 @@ public class VendaService implements Serializable{
     VendaDAO fabDAO = new VendaDAO();
     
     public void salvar(Venda v) throws NegocioException{
-        if(v.getID() == null || v.getVendedor() == null || v.getDataVenda() == null){
+        if(v.getItens() == null || v.getVendedor() == null || v.getDataVenda() == null){
             throw new NegocioException("Verifique a Venda! Ela pode não possuir "
-                    + "um Vendedor responsável, ID ou uma data definida.");
+                    + "um Vendedor responsável, produtos ou uma data definida.");
         }
         
         fabDAO.salvar(v);

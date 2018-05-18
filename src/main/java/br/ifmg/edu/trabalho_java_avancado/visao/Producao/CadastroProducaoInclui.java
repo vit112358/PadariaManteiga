@@ -1,14 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.ifmg.edu.trabalho_java_avancado.visao.Producao;
 
-import br.ifmg.edu.trabalho_java_avancado.visao.CadastroVendedores.*;
-import br.ifmg.edu.trabalho_java_avancado.modelo.Vendedor;
-import br.ifmg.edu.trabalho_java_avancado.service.VendedorService;
+import br.ifmg.edu.trabalho_java_avancado.modelo.ItemProducao;
+import br.ifmg.edu.trabalho_java_avancado.modelo.Producao;
+import br.ifmg.edu.trabalho_java_avancado.service.ProducaoService;
 import br.ifmg.edu.trabalho_java_avancado.util.NegocioException;
+import br.ifmg.edu.trabalho_java_avancado.visao.Producao.itensProducao.ProducaoProdutoInclui;
+import br.ifmg.edu.trabalho_java_avancado.visao.Producao.itensProducao.itensProducaoTableModel;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -22,18 +22,22 @@ import javax.swing.JOptionPane;
  */
 public class CadastroProducaoInclui extends javax.swing.JDialog {
 
-    /**
-     * Creates new form CadastroVendedorInclui
-     */
-    
-    private VendedorService vService;
-    
-    
-    public CadastroProducaoInclui(JDialog parent, boolean modal, VendedorService vService) {
+    private ProducaoService pService;
+    private List<ItemProducao> itens = new ArrayList<>();
+    private itensProducaoTableModel iProducao;
+
+    public CadastroProducaoInclui(JDialog parent, boolean modal, ProducaoService pService) {
         super(parent, modal);
         initComponents();
-        
-        this.vService = vService;
+
+        this.pService = pService;
+
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        String dtAtual = sdf.format(new Date());
+        jFmtData.setText(dtAtual);
+        jFmtData.setEditable(false);
+
+        atualizaDados();
     }
 
     /**
@@ -52,6 +56,8 @@ public class CadastroProducaoInclui extends javax.swing.JDialog {
         jTBBotoes = new javax.swing.JToolBar();
         jBtnIncluir = new javax.swing.JButton();
         jBtnRemover = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jFmtData = new javax.swing.JFormattedTextField();
         jPanel2 = new javax.swing.JPanel();
         jBtnSalva = new javax.swing.JButton();
         jBtnFechar = new javax.swing.JButton();
@@ -80,7 +86,7 @@ public class CadastroProducaoInclui extends javax.swing.JDialog {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(jScrollPane1)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -95,6 +101,11 @@ public class CadastroProducaoInclui extends javax.swing.JDialog {
         jBtnIncluir.setFocusable(false);
         jBtnIncluir.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         jBtnIncluir.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jBtnIncluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnIncluirActionPerformed(evt);
+            }
+        });
         jTBBotoes.add(jBtnIncluir);
 
         jBtnRemover.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/remove (2).png"))); // NOI18N
@@ -102,7 +113,16 @@ public class CadastroProducaoInclui extends javax.swing.JDialog {
         jBtnRemover.setFocusable(false);
         jBtnRemover.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         jBtnRemover.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jBtnRemover.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnRemoverActionPerformed(evt);
+            }
+        });
         jTBBotoes.add(jBtnRemover);
+
+        jLabel1.setText("Data:");
+
+        jFmtData.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("d/M/yy"))));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -111,18 +131,26 @@ public class CadastroProducaoInclui extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTBBotoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jTBBotoes, javax.swing.GroupLayout.DEFAULT_SIZE, 568, Short.MAX_VALUE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, 18)
+                        .addComponent(jFmtData, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jFmtData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jTBBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTBBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jBtnSalva.setText("Salvar");
@@ -181,50 +209,93 @@ public class CadastroProducaoInclui extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        setSize(new java.awt.Dimension(636, 432));
+        setSize(new java.awt.Dimension(636, 447));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBtnFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnFecharActionPerformed
-        // TODO add your handling code here:
         setVisible(false);
     }//GEN-LAST:event_jBtnFecharActionPerformed
 
     private void jBtnSalvaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSalvaActionPerformed
-        // TODO add your handling code here:
-        /*String t = new String(jPwd1.getPassword());
-        String t1 = new String(jPwd2.getPassword());
-        if(jTxtNome.getText() == null || jTxtNome.getText().trim().equals("")
-            || jTxtLogin.getText() == null || jTxtLogin.getText().trim().equals("")
-            || t == null || t.trim().equals("")
-            || t1 == null || t1.trim().equals("")     
-                ){
-            JOptionPane.showMessageDialog(this, 
-                    "Existem Campos obrigatórios não preenchidos");            
+
+        if (itens == null) {
+            JOptionPane.showMessageDialog(this,
+                    "Não existem Produtos nessa Produção!");
             return;
-        }*/
-        
-        int resp = JOptionPane.showConfirmDialog(this, 
+        }
+
+        int resp = JOptionPane.showConfirmDialog(this,
                 "Confirma a Edição?",
                 "Editar registro",
                 JOptionPane.YES_NO_OPTION,
                 JOptionPane.QUESTION_MESSAGE);
-        
-        if (resp != JOptionPane.YES_OPTION)
-           return;
-        
+
+        if (resp != JOptionPane.YES_OPTION) {
+            return;
+        }
+
+        Producao p = new Producao();
+
+        SimpleDateFormat s = new SimpleDateFormat("dd/MM/yyyy");
+        Date d = null;
+        try {
+            d = s.parse(jFmtData.getText());
+        } catch (ParseException ex) {
+            Logger.getLogger(CadastroProducaoInclui.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        p.setDataProducao(d);
+        p.setProdutos_feitos(itens);
+        itens.forEach((iten) -> {
+            iten.setProducao(p);
+        });
+
+        try {
+            pService.salvar(p);
+        } catch (NegocioException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+
     }//GEN-LAST:event_jBtnSalvaActionPerformed
+
+    private void jBtnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirActionPerformed
+        ProducaoProdutoInclui dialog = new ProducaoProdutoInclui(this, true, itens);
+        dialog.setVisible(true);
+        atualizaDados();
+    }//GEN-LAST:event_jBtnIncluirActionPerformed
+
+    private void jBtnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnRemoverActionPerformed
+        if (jTableProdutos.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(this,
+                    "Por favor, selecione um registro");
+            return;
+        }
+
+        int resp = JOptionPane.showConfirmDialog(this,
+                "Confirma a exclusão?",
+                "Excluir registro",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE);
+
+        if (resp != JOptionPane.YES_OPTION) {
+            return;
+        }
+
+        itens.remove(jTableProdutos.getSelectedRow());
+        atualizaDados();
+    }//GEN-LAST:event_jBtnRemoverActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnFechar;
     private javax.swing.JButton jBtnIncluir;
     private javax.swing.JButton jBtnRemover;
     private javax.swing.JButton jBtnSalva;
+    private javax.swing.JFormattedTextField jFmtData;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -232,4 +303,9 @@ public class CadastroProducaoInclui extends javax.swing.JDialog {
     private javax.swing.JToolBar jTBBotoes;
     private javax.swing.JTable jTableProdutos;
     // End of variables declaration//GEN-END:variables
+
+    private void atualizaDados() {
+        iProducao = new itensProducaoTableModel(itens);
+        jTableProdutos.setModel(iProducao);
+    }
 }

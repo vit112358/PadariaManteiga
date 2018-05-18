@@ -22,29 +22,30 @@ import javax.swing.JOptionPane;
  *
  * @author Vitor
  */
-public class CadastroVendasInclui extends javax.swing.JDialog {
+public class CadastroVendasEdita extends javax.swing.JDialog {
     
-    private Funcionario vendedor;
+    private Venda venda;
     private VendaService vService;
     private List<VendaProduto> itens = new ArrayList<>();
     private ItensVendaTableModel ivTableModel; 
     private Float valor;
     
-    public CadastroVendasInclui(JDialog parent, boolean modal, Funcionario f, VendaService vService) {
+    public CadastroVendasEdita(JDialog parent, boolean modal, Venda v, VendaService vService) {
         super(parent, modal);
         initComponents();
         
-        this.vendedor = f;
+        this.venda = v;
         this.vService = vService;
         
+        itens.addAll(v.getItens());
         SimpleDateFormat sdf  = new SimpleDateFormat("dd/MM/yyyy");
-        String dtAtual = sdf.format(new Date());
+        String dtAtual = sdf.format(v.getDataVenda());
         jFmtData.setText(dtAtual);
         jFmtData.setEditable(false);
         
-        jTxtValor.setText("0.00");
+        jTxtValor.setText(String.valueOf(v.getPrecoVenda()));
         jTxtValor.setEditable(false);
-        jTxtVendedor.setText(f.getNome());
+        jTxtVendedor.setText(v.getVendedor().getNome());
         jTxtVendedor.setEditable(false);
 
         atualizaDados();
@@ -346,69 +347,29 @@ public class CadastroVendasInclui extends javax.swing.JDialog {
             return;
         }
         
-        Venda v = new Venda();
         
-        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        
+        /*SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
         try {
             v.setDataVenda(formato.parse(jFmtData.getText()));
         } catch (ParseException ex) {
-            Logger.getLogger(CadastroVendasInclui.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            Logger.getLogger(CadastroVendasEdita.class.getName()).log(Level.SEVERE, null, ex);
+        }*/
         
-        v.setItens(itens);
-        v.setPrecoVenda(valor);
-        v.setVendedor(vendedor);
+        venda.setItens(itens);
+        venda.setPrecoVenda(valor);
+        //v.setVendedor(vendedor);
         
         for (VendaProduto iten : itens) {
-            iten.setVenda(v);
+            iten.setVenda(venda);
         }
         
         try {
-            vService.salvar(v);
+            vService.salvar(venda);
         } catch (NegocioException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
     }//GEN-LAST:event_jBtnSalvarActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-    
-    /*
-    public static void main(String args[]) {
-        
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CadastroVendasInclui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CadastroVendasInclui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CadastroVendasInclui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CadastroVendasInclui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        
-
-      
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                CadastroVendasInclui dialog = new CadastroVendasInclui(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
-    }*/
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnEditar;
@@ -433,6 +394,9 @@ public class CadastroVendasInclui extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void atualizaDados() {
+        for (VendaProduto iten : itens) {
+            iten.setTotal(iten.getValor()*iten.getQtde());
+        }
         valor = new Float(0);
         for (VendaProduto iten : itens) {
             valor+=iten.getTotal();

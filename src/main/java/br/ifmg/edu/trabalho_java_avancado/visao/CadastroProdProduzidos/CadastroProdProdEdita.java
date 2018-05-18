@@ -1,5 +1,8 @@
 package br.ifmg.edu.trabalho_java_avancado.visao.CadastroProdProduzidos;
 
+import br.ifmg.edu.trabalho_java_avancado.visao.CadastroProdProduzidos.ItemProduto.CadastroIncluiAddProduto;
+import br.ifmg.edu.trabalho_java_avancado.visao.CadastroProdProduzidos.ItemProduto.CadastroIncluiEditaProduto;
+import br.ifmg.edu.trabalho_java_avancado.visao.CadastroProdProduzidos.ItemProduto.ItemTableModel;
 import br.ifmg.edu.trabalho_java_avancado.modelo.Itens;
 import br.ifmg.edu.trabalho_java_avancado.modelo.Materia_Prima;
 import br.ifmg.edu.trabalho_java_avancado.modelo.ProdutoProduzido;
@@ -353,7 +356,7 @@ public class CadastroProdProdEdita extends javax.swing.JDialog {
 
     private void jBtnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirActionPerformed
         // TODO add your handling code here:
-        CadastroIncluiAddProduto dialog = new CadastroIncluiAddProduto(this, true, materiais_usados, prod);
+        CadastroIncluiAddProduto dialog = new CadastroIncluiAddProduto(this, true, materiais_usados);
         dialog.setVisible(true);        
         carregaTabela();
     }//GEN-LAST:event_jBtnIncluirActionPerformed

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.ifmg.edu.trabalho_java_avancado.visao;
 
 import br.ifmg.edu.trabalho_java_avancado.modelo.Adm;
@@ -12,12 +7,12 @@ import br.ifmg.edu.trabalho_java_avancado.visao.CadastroProdTerceiros.CadastroPr
 import br.ifmg.edu.trabalho_java_avancado.visao.CadastroVendedores.CadastroVendedorListagem;
 import br.ifmg.edu.trabalho_java_avancado.visao.CadastroFornecedor.CadastroFornecedorListagem;
 import br.ifmg.edu.trabalho_java_avancado.visao.CadastroProdProduzidos.CadastroProdProduzidosListagem;
+import br.ifmg.edu.trabalho_java_avancado.visao.Producao.CadastroProducaoListagem;
 import br.ifmg.edu.trabalho_java_avancado.visao.Vendas.CadastroVendasListagem;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.DecimalFormat;
 import java.util.Calendar;
-import java.util.Locale;
 import javax.swing.Timer;
 
 /**
@@ -63,6 +58,7 @@ public class VisaoPrincipal_Adm extends javax.swing.JFrame {
         jSubMenuProdTerc = new javax.swing.JMenuItem();
         jSubMenuProdProduzido = new javax.swing.JMenuItem();
         jMenuProducao = new javax.swing.JMenu();
+        jSubMenuIniciaProducao = new javax.swing.JMenuItem();
         jMenuVendas = new javax.swing.JMenu();
         jSubMenuVenda = new javax.swing.JMenuItem();
         jMenuRelatorios = new javax.swing.JMenu();
@@ -155,6 +151,16 @@ public class VisaoPrincipal_Adm extends javax.swing.JFrame {
         jMenuAdm.add(jMenuCadastro);
 
         jMenuProducao.setText("Produção");
+
+        jSubMenuIniciaProducao.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.ALT_MASK | java.awt.event.InputEvent.CTRL_MASK));
+        jSubMenuIniciaProducao.setText("Inicia Produção");
+        jSubMenuIniciaProducao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jSubMenuIniciaProducaoActionPerformed(evt);
+            }
+        });
+        jMenuProducao.add(jSubMenuIniciaProducao);
+
         jMenuAdm.add(jMenuProducao);
 
         jMenuVendas.setText("Vendas");
@@ -205,7 +211,6 @@ public class VisaoPrincipal_Adm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jSubMenuVendedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSubMenuVendedorActionPerformed
-        // TODO add your handling code here:
         CadastroVendedorListagem dialog = new CadastroVendedorListagem(this, true);
         dialog.setVisible(true);
     }//GEN-LAST:event_jSubMenuVendedorActionPerformed
@@ -217,68 +222,34 @@ public class VisaoPrincipal_Adm extends javax.swing.JFrame {
     }//GEN-LAST:event_jSubMenuFornecedorActionPerformed
 
     private void jSubMenuMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSubMenuMateriaActionPerformed
-        // TODO add your handling code here:
         CadastroMateriaListagem dialog = new CadastroMateriaListagem(this, true);
         dialog.setVisible(true);
     }//GEN-LAST:event_jSubMenuMateriaActionPerformed
 
     private void jSubMenuProdTercActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSubMenuProdTercActionPerformed
-        // TODO add your handling code here:
         CadastroProdTercListagem dialog = new CadastroProdTercListagem(this, true);
         dialog.setVisible(true);
     }//GEN-LAST:event_jSubMenuProdTercActionPerformed
 
     private void jSubMenuAdmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSubMenuAdmActionPerformed
-        // TODO add your handling code here:
         CadastroAdmListagem dialog = new CadastroAdmListagem(this, true);
         dialog.setVisible(true);
     }//GEN-LAST:event_jSubMenuAdmActionPerformed
 
     private void jSubMenuProdProduzidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSubMenuProdProduzidoActionPerformed
-        // TODO add your handling code here:
         CadastroProdProduzidosListagem dialog = new CadastroProdProduzidosListagem(this, true);
         dialog.setVisible(true);
     }//GEN-LAST:event_jSubMenuProdProduzidoActionPerformed
 
     private void jSubMenuVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSubMenuVendaActionPerformed
-        // TODO add your handling code here:
         CadastroVendasListagem dialog = new CadastroVendasListagem(this, true, a);
         dialog.setVisible(true);
     }//GEN-LAST:event_jSubMenuVendaActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    
-    /*
-    public static void main(String args[]) {
-        
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Windows".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VisaoPrincipal_Adm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VisaoPrincipal_Adm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VisaoPrincipal_Adm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VisaoPrincipal_Adm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new VisaoPrincipal_Adm().setVisible(true);
-            }
-        });
-    }*/
+    private void jSubMenuIniciaProducaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSubMenuIniciaProducaoActionPerformed
+        CadastroProducaoListagem dialog = new CadastroProducaoListagem(this, true);
+        dialog.setVisible(true);
+    }//GEN-LAST:event_jSubMenuIniciaProducaoActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
@@ -291,6 +262,7 @@ public class VisaoPrincipal_Adm extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JMenuItem jSubMenuAdm;
     private javax.swing.JMenuItem jSubMenuFornecedor;
+    private javax.swing.JMenuItem jSubMenuIniciaProducao;
     private javax.swing.JMenuItem jSubMenuMateria;
     private javax.swing.JMenuItem jSubMenuProdProduzido;
     private javax.swing.JMenuItem jSubMenuProdTerc;

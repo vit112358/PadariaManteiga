@@ -1,7 +1,8 @@
-package br.ifmg.edu.trabalho_java_avancado.visao.CadastroProdProduzidos;
+package br.ifmg.edu.trabalho_java_avancado.visao.CadastroProdProduzidos.ItemProduto;
 
 import br.ifmg.edu.trabalho_java_avancado.modelo.Itens;
 import br.ifmg.edu.trabalho_java_avancado.modelo.Materia_Prima;
+import br.ifmg.edu.trabalho_java_avancado.modelo.ProdutoProduzido;
 import br.ifmg.edu.trabalho_java_avancado.service.Materia_PrimaService;
 import java.util.List;
 import java.util.Vector;
@@ -9,14 +10,9 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author Vitor
- */
-public class CadastroIncluiEditaProduto extends javax.swing.JDialog {
+public class CadastroIncluiAddProduto extends javax.swing.JDialog {
 
     private List<Itens> materiais;
-    private Itens item;
 
     /**
      * Creates new form CadastroIncluiAddProduto
@@ -24,16 +20,13 @@ public class CadastroIncluiEditaProduto extends javax.swing.JDialog {
      * @param modal
      * @param itens
      */
-    public CadastroIncluiEditaProduto(JDialog parent, boolean modal, List<Itens> itens, Itens i) {
+    public CadastroIncluiAddProduto(JDialog parent, boolean modal, List<Itens> itens) {
         super(parent, modal);
         initComponents();
 
         this.materiais = itens;
-        this.item = i;
 
         carregaCombos();
-        jcbxMateria.setSelectedItem(item.getMp());
-        jTxtQtde.setText(String.valueOf(item.getQtde()));
     }
 
     /**
@@ -57,7 +50,7 @@ public class CadastroIncluiEditaProduto extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Sistema de Padaria");
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Editar Produto"));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Adicionar Produto"));
 
         jLabel1.setText("Matéria Prima:");
 
@@ -94,7 +87,7 @@ public class CadastroIncluiEditaProduto extends javax.swing.JDialog {
                 .addContainerGap(20, Short.MAX_VALUE))
         );
 
-        jBtnIncluir.setText("Editar");
+        jBtnIncluir.setText("Incluir");
         jBtnIncluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtnIncluirActionPerformed(evt);
@@ -147,25 +140,22 @@ public class CadastroIncluiEditaProduto extends javax.swing.JDialog {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
-        setSize(new java.awt.Dimension(369, 224));
+        setSize(new java.awt.Dimension(369, 233));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBtnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirActionPerformed
-        // TODO add your handling code here:
-        Materia_Prima aux1 = new Materia_Prima();
-
         if (jTxtQtde.getText().contains(",")) {
             jTxtQtde.setText(jTxtQtde.getText().replace(",", "."));
         }
 
         if (!(jTxtQtde.getText() == null || jTxtQtde.getText().trim().equals(""))) {
             int resp = JOptionPane.showConfirmDialog(this,
-                    "Confirma a Edição?",
-                    "Incluir Edição",
+                    "Confirma a inclusão?",
+                    "Incluir registro",
                     JOptionPane.YES_NO_OPTION,
                     JOptionPane.QUESTION_MESSAGE);
 
@@ -173,12 +163,11 @@ public class CadastroIncluiEditaProduto extends javax.swing.JDialog {
                 return;
             }
 
-            aux1 = (Materia_Prima) jcbxMateria.getSelectedItem();
-            item.setID(aux1.getID());
-            item.setMp(aux1);
-            item.setQtde(Integer.parseInt(jTxtQtde.getText()));
-
-            JOptionPane.showMessageDialog(this, "Edição feita com sucesso!");
+            Itens i = new Itens();
+            i.setMp((Materia_Prima)jcbxMateria.getSelectedItem());
+            i.setQtde(Integer.parseInt(jTxtQtde.getText()));
+            
+            materiais.add(i);
         }else{
             JOptionPane.showMessageDialog(this, "Por favor defina a quantidade de produto a ser usado!");
         }

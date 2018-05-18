@@ -165,9 +165,9 @@ public class CadastroProducaoListagem extends javax.swing.JDialog {
 
     private void jBtnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirActionPerformed
         // TODO add your handling code here:
-        //CadastroVendedorInclui dialog = new CadastroVendedorInclui(this, true, vService);
-        //dialog.setVisible(true);
-        //atualizaDados();
+        CadastroProducaoInclui dialog = new CadastroProducaoInclui(this, true, pService);
+        dialog.setVisible(true);
+        atualizaDados();
     }//GEN-LAST:event_jBtnIncluirActionPerformed
 
     private void jBtnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnEditarActionPerformed

@@ -1,5 +1,8 @@
 package br.ifmg.edu.trabalho_java_avancado.visao.CadastroProdProduzidos;
 
+import br.ifmg.edu.trabalho_java_avancado.visao.CadastroProdProduzidos.ItemProduto.CadastroIncluiAddProduto;
+import br.ifmg.edu.trabalho_java_avancado.visao.CadastroProdProduzidos.ItemProduto.CadastroIncluiEditaProduto;
+import br.ifmg.edu.trabalho_java_avancado.visao.CadastroProdProduzidos.ItemProduto.ItemTableModel;
 import br.ifmg.edu.trabalho_java_avancado.modelo.Itens;
 import br.ifmg.edu.trabalho_java_avancado.modelo.ProdutoProduzido;
 import br.ifmg.edu.trabalho_java_avancado.service.ProdutosProduzidosService;
@@ -21,7 +24,6 @@ public class CadastroProdProdInclui extends javax.swing.JDialog {
     private ProdutosProduzidosService PTService;
     private List<Itens> materiais_usados;
     private ItemTableModel iTableModel;
-    private ProdutoProduzido f;
     private Float precoC;
 
     public CadastroProdProdInclui(JDialog parent, boolean modal, ProdutosProduzidosService pService) {
@@ -30,7 +32,6 @@ public class CadastroProdProdInclui extends javax.swing.JDialog {
 
         this.PTService = pService;
         materiais_usados = new LinkedList<>();
-        f = new ProdutoProduzido();
         jTxtEstoque.setText("0");
         jTxtEstoque.setEditable(false);
         jTxtEstoqueMin.setText("0");
@@ -318,6 +319,7 @@ public class CadastroProdProdInclui extends javax.swing.JDialog {
             jTxtPrecoVenda.setText(jTxtPrecoVenda.getText().replace(",", "."));
         }
 
+        ProdutoProduzido f = new ProdutoProduzido();
         f.setNome(jTxtNome.getText());
         f.setPrecoCusto(Float.parseFloat(jTxtPrecoCusto.getText()));
         f.setPrecoVenda(Float.parseFloat(jTxtPrecoVenda.getText()));
@@ -325,6 +327,9 @@ public class CadastroProdProdInclui extends javax.swing.JDialog {
         f.setEstoqueMin(Integer.parseInt(jTxtEstoqueMin.getText()));
         f.setMateriaisUsados(materiais_usados);
 
+        for (Itens materiais_usado : materiais_usados) {
+            materiais_usado.setProduto(f);
+        }
         try {
             PTService.salvar(f);
         } catch (NegocioException ex) {
@@ -341,7 +346,7 @@ public class CadastroProdProdInclui extends javax.swing.JDialog {
     }//GEN-LAST:event_jBtnEditarActionPerformed
 
     private void jBtnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirActionPerformed
-        CadastroIncluiAddProduto dialog = new CadastroIncluiAddProduto(this, true, materiais_usados, f);
+        CadastroIncluiAddProduto dialog = new CadastroIncluiAddProduto(this, true, materiais_usados);
         dialog.setVisible(true);
         carregaTabela();
     }//GEN-LAST:event_jBtnIncluirActionPerformed

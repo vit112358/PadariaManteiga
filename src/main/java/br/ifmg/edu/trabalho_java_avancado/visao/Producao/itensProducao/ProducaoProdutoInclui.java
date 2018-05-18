@@ -1,9 +1,9 @@
-package br.ifmg.edu.trabalho_java_avancado.visao.Vendas.itens;
+package br.ifmg.edu.trabalho_java_avancado.visao.Producao.itensProducao;
 
+import br.ifmg.edu.trabalho_java_avancado.modelo.ItemProducao;
 import br.ifmg.edu.trabalho_java_avancado.modelo.Produto;
-import br.ifmg.edu.trabalho_java_avancado.modelo.VendaProduto;
+import br.ifmg.edu.trabalho_java_avancado.modelo.ProdutoProduzido;
 import br.ifmg.edu.trabalho_java_avancado.service.ProdutosProduzidosService;
-import br.ifmg.edu.trabalho_java_avancado.service.ProdutosTerceirosService;
 import java.util.List;
 import java.util.Vector;
 import javax.swing.DefaultComboBoxModel;
@@ -14,23 +14,21 @@ import javax.swing.JOptionPane;
  *
  * @author vitor
  */
-public class VendaProdutoInclui extends javax.swing.JDialog {
+public class ProducaoProdutoInclui extends javax.swing.JDialog {
 
-    /**
-     * Creates new form UsuarioInclui
-     */
-    private List<VendaProduto> produtos;
+    
+    private List<ItemProducao> produtos;
 
     //Estou reutilizando o objeto da camada de serviço da tela de listagem,
     //assim economizamos recursos do computador.
-    public VendaProdutoInclui(JDialog parent, boolean modal, List<VendaProduto> produtos) {
+    public ProducaoProdutoInclui(JDialog parent, boolean modal, List<ItemProducao> produtos) {
         super(parent, modal);
         initComponents();
         this.produtos = produtos;
 
         carregaCombos();
 
-        jfmtValor.setText("00,00");
+        jFmtQtde.setText("00,00");
     }
 
     /**
@@ -46,7 +44,7 @@ public class VendaProdutoInclui extends javax.swing.JDialog {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jCbxProdutos = new javax.swing.JComboBox<>();
-        jfmtValor = new javax.swing.JTextField();
+        jFmtQtde = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
@@ -61,7 +59,7 @@ public class VendaProdutoInclui extends javax.swing.JDialog {
 
         jCbxProdutos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        jfmtValor.setText("0,00");
+        jFmtQtde.setText("0,00");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -75,7 +73,7 @@ public class VendaProdutoInclui extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jCbxProdutos, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jfmtValor))
+                    .addComponent(jFmtQtde))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -87,7 +85,7 @@ public class VendaProdutoInclui extends javax.swing.JDialog {
                     .addComponent(jCbxProdutos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jfmtValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jFmtQtde, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -179,14 +177,11 @@ public class VendaProdutoInclui extends javax.swing.JDialog {
             return;
         }
 
-        VendaProduto p = new VendaProduto();
-        Produto aux = (Produto) jCbxProdutos.getSelectedItem();
-        p.setProduto(aux);
-        p.setQtde(Integer.parseInt(jfmtValor.getText()));
-        p.setValor(aux.getPrecoVenda());
-        p.setTotal(aux.getPrecoVenda()*Integer.parseInt(jfmtValor.getText()));
+        ItemProducao p = new ItemProducao();
+        ProdutoProduzido aux = (ProdutoProduzido) jCbxProdutos.getSelectedItem();
+        p.setProd(aux);
+        p.setQtde(Integer.parseInt(jFmtQtde.getText()));   
         
-
         produtos.add(p);
         setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -196,24 +191,19 @@ public class VendaProdutoInclui extends javax.swing.JDialog {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JComboBox<String> jCbxProdutos;
+    private javax.swing.JTextField jFmtQtde;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField jfmtValor;
     // End of variables declaration//GEN-END:variables
 
     private void carregaCombos() {
-
-        //--------------------
-        ProdutosProduzidosService PPService = new ProdutosProduzidosService();
-        ProdutosTerceirosService PTService = new ProdutosTerceirosService();
+        ProdutosProduzidosService PTService = new ProdutosProduzidosService();
 
         //O construtor do DefaultComboBoxModel aceita apenas
         //vector ou array. Assim, criei um vector com os daddos do BD.
-        Vector<Produto> produtos
-                = new Vector<>(PPService.buscarTodos());
-        produtos.addAll(PTService.buscarTodos());
+        Vector<Produto> produtos = new Vector<>(PTService.buscarTodos());
         DefaultComboBoxModel dcmDono
                 = new DefaultComboBoxModel(produtos);
         jCbxProdutos.setModel(dcmDono);
