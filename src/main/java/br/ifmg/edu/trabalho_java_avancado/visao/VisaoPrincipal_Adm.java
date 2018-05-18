@@ -53,10 +53,10 @@ public class VisaoPrincipal_Adm extends javax.swing.JFrame {
         jMenuCadastro = new javax.swing.JMenu();
         jSubMenuAdm = new javax.swing.JMenuItem();
         jSubMenuFornecedor = new javax.swing.JMenuItem();
-        jSubMenuVendedor = new javax.swing.JMenuItem();
         jSubMenuMateria = new javax.swing.JMenuItem();
         jSubMenuProdTerc = new javax.swing.JMenuItem();
         jSubMenuProdProduzido = new javax.swing.JMenuItem();
+        jSubMenuVendedor = new javax.swing.JMenuItem();
         jMenuProducao = new javax.swing.JMenu();
         jSubMenuIniciaProducao = new javax.swing.JMenuItem();
         jMenuVendas = new javax.swing.JMenu();
@@ -112,15 +112,6 @@ public class VisaoPrincipal_Adm extends javax.swing.JFrame {
         });
         jMenuCadastro.add(jSubMenuFornecedor);
 
-        jSubMenuVendedor.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, java.awt.event.InputEvent.CTRL_MASK));
-        jSubMenuVendedor.setText("Funcionários");
-        jSubMenuVendedor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jSubMenuVendedorActionPerformed(evt);
-            }
-        });
-        jMenuCadastro.add(jSubMenuVendedor);
-
         jSubMenuMateria.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_M, java.awt.event.InputEvent.CTRL_MASK));
         jSubMenuMateria.setText("Matérias-Primas");
         jSubMenuMateria.addActionListener(new java.awt.event.ActionListener() {
@@ -148,12 +139,21 @@ public class VisaoPrincipal_Adm extends javax.swing.JFrame {
         });
         jMenuCadastro.add(jSubMenuProdProduzido);
 
+        jSubMenuVendedor.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.event.InputEvent.CTRL_MASK));
+        jSubMenuVendedor.setText("Vendedores");
+        jSubMenuVendedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jSubMenuVendedorActionPerformed(evt);
+            }
+        });
+        jMenuCadastro.add(jSubMenuVendedor);
+
         jMenuAdm.add(jMenuCadastro);
 
         jMenuProducao.setText("Produção");
 
         jSubMenuIniciaProducao.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.ALT_MASK | java.awt.event.InputEvent.CTRL_MASK));
-        jSubMenuIniciaProducao.setText("Inicia Produção");
+        jSubMenuIniciaProducao.setText("Cadastra Produção");
         jSubMenuIniciaProducao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jSubMenuIniciaProducaoActionPerformed(evt);

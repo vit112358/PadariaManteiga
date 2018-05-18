@@ -35,8 +35,13 @@ public class ProducaoDAO {
     }
     
     public List<Integer> buscaNumItens(){
-        String sql = "Select Count(i) from Producao p "
-                + "join p.itens i";
+        /*
+        select Sum(QTDE) from producao join 
+        itemproducao on(Producao_Id = Cod_producao) group by(Cod_producao);
+        */
+        String sql = "Select sum(i.Qtde) from Producao p "
+                + "join p.itens i "
+                + "group by p";
         
         List<Integer> resultado = em.createQuery(sql).getResultList();
         

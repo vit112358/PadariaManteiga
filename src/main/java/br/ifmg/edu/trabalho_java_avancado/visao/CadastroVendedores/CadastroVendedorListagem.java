@@ -158,7 +158,8 @@ public class CadastroVendedorListagem extends javax.swing.JDialog {
 
     private void jBtnIncluirMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnIncluirMouseEntered
         // TODO add your handling code here:
-        jBtnIncluir.setToolTipText("Neste Botão será possível cadastrar um Funcionário!");
+        jBtnIncluir.setToolTipText("Neste Botão será possível cadastrar um Vendedor"
+                + "!");
     }//GEN-LAST:event_jBtnIncluirMouseEntered
 
     private void jBtnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAtualizarActionPerformed

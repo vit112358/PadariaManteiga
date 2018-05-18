@@ -21,23 +21,25 @@ import javax.swing.JOptionPane;
  *
  * @author Vitor
  */
-public class CadastroProducaoInclui extends javax.swing.JDialog {
+public class CadastroProducaoEdita extends javax.swing.JDialog {
 
     private ProducaoService pService;
+    private Producao p;
     private List<ItemProducao> itens = new ArrayList<>();
     private itensProducaoTableModel iProducao;
 
-    public CadastroProducaoInclui(JDialog parent, boolean modal, ProducaoService pService) {
+    public CadastroProducaoEdita(JDialog parent, boolean modal, ProducaoService pService, Producao p) {
         super(parent, modal);
         initComponents();
 
         this.pService = pService;
+        this.p = p;
 
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        String dtAtual = sdf.format(new Date());
+        String dtAtual = sdf.format(p.getDataProducao());
         jFmtData.setText(dtAtual);
         jFmtData.setEditable(false);
-
+        itens.addAll(p.getProdutos_feitos());
         atualizaDados();
     }
 
@@ -240,8 +242,8 @@ public class CadastroProducaoInclui extends javax.swing.JDialog {
         }
 
         int resp = JOptionPane.showConfirmDialog(this,
-                "Confirma a Inclusão?",
-                "Incluir registro",
+                "Confirma a Edição?",
+                "Editar registro",
                 JOptionPane.YES_NO_OPTION,
                 JOptionPane.QUESTION_MESSAGE);
 
@@ -249,14 +251,14 @@ public class CadastroProducaoInclui extends javax.swing.JDialog {
             return;
         }
 
-        Producao p = new Producao();
+        p = new Producao();
 
         SimpleDateFormat s = new SimpleDateFormat("dd/MM/yyyy");
         Date d = null;
         try {
             d = s.parse(jFmtData.getText());
         } catch (ParseException ex) {
-            Logger.getLogger(CadastroProducaoInclui.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CadastroProducaoEdita.class.getName()).log(Level.SEVERE, null, ex);
         }
         p.setDataProducao(d);
         p.setProdutos_feitos(itens);
@@ -285,11 +287,10 @@ public class CadastroProducaoInclui extends javax.swing.JDialog {
             return;
         }
 
-        int resp = JOptionPane.showConfirmDialog(this,
-                "Confirma a exclusão?",
-                "Excluir registro",
-                JOptionPane.YES_NO_OPTION,
-                JOptionPane.QUESTION_MESSAGE);
+        Object[] options = {"Sim", "Não"};
+        int resp = JOptionPane.showOptionDialog(null, "Confirma a Remoção?", "Remover registro",
+                JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null,
+                options, options[0]);
 
         if (resp != JOptionPane.YES_OPTION) {
             return;
@@ -305,9 +306,8 @@ public class CadastroProducaoInclui extends javax.swing.JDialog {
                     "Por favor, selecione um registro");
             return;
         }
-       
-        ItemProducao p = itens.get(jTableProdutos.getSelectedRow());
-        ProducaoProdutoEdita dialog = new ProducaoProdutoEdita(this, true, p);
+        ItemProducao i = itens.get(jTableProdutos.getSelectedRow());
+        ProducaoProdutoEdita dialog = new ProducaoProdutoEdita(this, true, i);
         dialog.setVisible(true);
         atualizaDados();
     }//GEN-LAST:event_jBtnEditarActionPerformed

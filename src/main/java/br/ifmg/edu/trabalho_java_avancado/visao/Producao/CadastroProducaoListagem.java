@@ -155,7 +155,7 @@ public class CadastroProducaoListagem extends javax.swing.JDialog {
 
     private void jBtnIncluirMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnIncluirMouseEntered
         // TODO add your handling code here:
-        jBtnIncluir.setToolTipText("Neste Botão será possível cadastrar um Funcionário!");
+        jBtnIncluir.setToolTipText("Neste Botão será possível cadstrar uma Produção!");
     }//GEN-LAST:event_jBtnIncluirMouseEntered
 
     private void jBtnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAtualizarActionPerformed
@@ -180,8 +180,8 @@ public class CadastroProducaoListagem extends javax.swing.JDialog {
         
         Producao p = producao.get(jTableFunc.getSelectedRow());
         
-        //CadastroVendedorEdita dialog = new CadastroVendedorEdita(this, true, vService, v);
-        //dialog.setVisible(true);
+        CadastroProducaoEdita dialog = new CadastroProducaoEdita(this, true, pService, p);
+        dialog.setVisible(true);
         atualizaDados();
     }//GEN-LAST:event_jBtnEditarActionPerformed
 
