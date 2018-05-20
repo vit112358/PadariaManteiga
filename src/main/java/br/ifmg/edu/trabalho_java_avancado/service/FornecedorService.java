@@ -35,7 +35,7 @@ public class FornecedorService implements Serializable {
         return fabDAO.buscarTodos();
     }
     
-    public List<Fornecedor> getMateriaPeloNome(String nome){
+    public Fornecedor getFornecedorPeloNome(String nome){
         return fabDAO.getFornecedorPeloNome(nome);
     }
 }

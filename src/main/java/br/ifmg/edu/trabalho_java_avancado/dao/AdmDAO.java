@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.ifmg.edu.trabalho_java_avancado.dao;
 
 import br.ifmg.edu.trabalho_java_avancado.modelo.Adm;
@@ -18,12 +13,22 @@ public class AdmDAO {
     
     EntityManager em = FabricaEntity.getEntityManager();
     
+    /**
+     * Esta função salva um Administrador do Sistema no Banco de Dados
+     * 
+     * @param a Administrador a ser salvo
+     */
     public void salvar(Adm a){
         em.getTransaction().begin();
         em.merge(a);
         em.getTransaction().commit();
     }
     
+    /**
+     * Esta função remove um Administrador do Sistema no Banco de Dados
+     * 
+     * @param a Administrador a ser Removido
+     */
     public void remover(Adm a){
         Adm aux = em.find(Adm.class,a.getID());
         em.getTransaction().begin();
@@ -31,14 +36,32 @@ public class AdmDAO {
         em.getTransaction().commit();        
     }
     
+    /**
+     * Esta função busca um dado Administrador
+     * 
+     * @param codigo código do Administrador
+     * @return Administrador
+     */
     public Adm buscarPorCodigo(Integer codigo){
         return em.find(Adm.class, codigo);
     }
     
+    /**
+     *  Esta função busca todos os Administradores Cadastrados
+     * 
+     * @return Lista de Administradores
+     */
     public List<Adm> buscarTodos(){
         return em.createQuery("from Adm a").getResultList();
     }
     
+    /**
+     * Esta função valida o login de um Administrador
+     * 
+     * @param login Login do Administrador
+     * @param senha Senha do Administrador
+     * @return Administrador
+     */
     public Adm isLoginValido(String login, String senha){
         
         String sql = "Select u from Adm u "

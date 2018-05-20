@@ -13,12 +13,24 @@ public class FornecedorDAO {
     
     EntityManager em = FabricaEntity.getEntityManager();
     
+    /**
+     * Esta função salva um Fornecedor no Banco de Dados
+     * 
+     * @param f Fornecedor a ser salvo
+     */
     public void salvar(Fornecedor f){
         em.getTransaction().begin();
         em.merge(f);
         em.getTransaction().commit();
     }
     
+    /**
+     * Esta função remove um Fornecedor no Banco de Dados
+     * 
+     * @param f Fornecedor a ser removido
+     * 
+     * @return true se for removido, caso contrário false
+     */
     public boolean remover(Fornecedor f){
         Fornecedor aux = em.find(Fornecedor.class,f.getID());
         if (aux != null){
@@ -31,17 +43,34 @@ public class FornecedorDAO {
             return false;          
     }
     
+    /**
+     * Esta função busca um dado Fornecedor 
+     * 
+     * @param codigo código do Fornecedor
+     * @return Fornecedor
+     */
     public Fornecedor buscarPorCodigo(Integer codigo){
         return em.find(Fornecedor.class, codigo);
     }
     
+    /**
+     * Esta função busca todos os Fornecedores Cadastrados por Código
+     * 
+     * @return Lista de Fornecedores
+     */
     public List<Fornecedor> buscarTodos(){
         String sql = "from " + "Fornecedor" + " v";
         List<Fornecedor> v = em.createQuery(sql).getResultList();
         return v;
     }
     
-    public List<Fornecedor> getFornecedorPeloNome(String nome){
+    /**
+     * Esta função busca todos os Fornecedores Cadastrados por Razaão Social
+     * 
+     * @param nome Razao Social
+     * @return Fornecedor
+     */
+    public Fornecedor getFornecedorPeloNome(String nome){
         
         String sql = "Select c from Fornecedor c "
                    + "where c.razaoSocial like ?1";
@@ -49,6 +78,6 @@ public class FornecedorDAO {
         
         return em.createQuery(sql, Fornecedor.class)
                 .setParameter("1", nome)
-                .getResultList();  
+                .getSingleResult();  
     }
 }
