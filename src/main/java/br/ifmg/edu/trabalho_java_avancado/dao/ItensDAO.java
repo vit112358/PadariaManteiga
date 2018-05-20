@@ -46,7 +46,7 @@ public class ItensDAO {
     }
     
     public List<Itens> buscarTodos(){
-        String sql = "from " + "Vendedor" + " v";
+        String sql = "from " + "Itens" + " v";
         List<Itens> v = em.createQuery(sql).getResultList();
         return v;
     }
