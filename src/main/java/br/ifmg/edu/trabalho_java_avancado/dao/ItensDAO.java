@@ -12,12 +12,23 @@ import javax.persistence.EntityManager;
 public class ItensDAO {
     EntityManager em = FabricaEntity.getEntityManager();
     
+    /**
+     * Esta função salva os itens de uma produção
+     * 
+     * @param a Itens de uma produção 
+     */
     public void salvar(Itens a){
         em.getTransaction().begin();
         em.merge(a);
         em.getTransaction().commit();
     }
     
+    /**
+     * Esta função remove os itens de uma produção
+     * 
+     * @param a Itens a serem removidos
+     * @return true para remoção bem sucedida, falso para falha
+     */
     public boolean remover(Itens a){
         Itens aux = em.find(Itens.class,a.getID());
         if (aux != null){

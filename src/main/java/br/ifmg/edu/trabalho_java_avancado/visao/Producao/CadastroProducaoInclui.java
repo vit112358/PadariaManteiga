@@ -264,6 +264,11 @@ public class CadastroProducaoInclui extends javax.swing.JDialog {
             iten.setProducao(p);
         });
 
+        for (int i = 0; i < p.getProdutos_feitos().size(); i++) {
+            p.getProdutos_feitos().get(i).getProd().setEstoque(
+                    p.getProdutos_feitos().get(i).getProd().getEstoque()+p.getProdutos_feitos().get(i).getQtde());
+        }
+        
         try {
             pService.salvar(p);
         } catch (NegocioException ex) {
@@ -305,7 +310,7 @@ public class CadastroProducaoInclui extends javax.swing.JDialog {
                     "Por favor, selecione um registro");
             return;
         }
-       
+
         ItemProducao p = itens.get(jTableProdutos.getSelectedRow());
         ProducaoProdutoEdita dialog = new ProducaoProdutoEdita(this, true, p);
         dialog.setVisible(true);

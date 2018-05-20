@@ -32,5 +32,15 @@ public class VendaDAO {
     
     public List<Venda> buscarTodos(){
         return em.createQuery("from Venda v").getResultList();
-    }    
+    }
+
+    public void UpdateEstoque(Venda v){
+        /*
+        Update venda join vendaproduto on (Venda_Id = vendaproduto.codVenda) 
+        join produto on (vendaproduto.codProduto = produto.Prod_id) 
+        SET ESTOQUE = produto.ESTOQUE+vendaproduto.QTDE
+        where venda.Venda_Id=1;
+        */
+        String sql = "Upda";
+    }
 }
