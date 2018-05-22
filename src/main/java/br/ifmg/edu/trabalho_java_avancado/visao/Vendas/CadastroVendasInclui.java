@@ -23,25 +23,25 @@ import javax.swing.JOptionPane;
  * @author Vitor
  */
 public class CadastroVendasInclui extends javax.swing.JDialog {
-    
+
     private Funcionario vendedor;
     private VendaService vService;
     private List<VendaProduto> itens = new ArrayList<>();
-    private ItensVendaTableModel ivTableModel; 
+    private ItensVendaTableModel ivTableModel;
     private Float valor;
-    
+
     public CadastroVendasInclui(JDialog parent, boolean modal, Funcionario f, VendaService vService) {
         super(parent, modal);
         initComponents();
-        
+
         this.vendedor = f;
         this.vService = vService;
-        
-        SimpleDateFormat sdf  = new SimpleDateFormat("dd/MM/yyyy");
+
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         String dtAtual = sdf.format(new Date());
         jFmtData.setText(dtAtual);
         jFmtData.setEditable(false);
-        
+
         jTxtValor.setText("0.00");
         jTxtValor.setEditable(false);
         jTxtVendedor.setText(f.getNome());
@@ -316,26 +316,26 @@ public class CadastroVendasInclui extends javax.swing.JDialog {
     }//GEN-LAST:event_jBtnIncluirActionPerformed
 
     private void jBtnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnEditarActionPerformed
-        if(jTableVendaProd.getSelectedRow() == -1){
-            JOptionPane.showMessageDialog(this, 
-                    "Por favor, selecione um registro");            
+        if (jTableVendaProd.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(this,
+                    "Por favor, selecione um registro");
             return;
         }
-        
+
         VendaProduto v = itens.get(jTableVendaProd.getSelectedRow());
         VendaProdutoEdita dialog = new VendaProdutoEdita(this, true, v);
         dialog.setVisible(true);
         atualizaDados();
-        
+
     }//GEN-LAST:event_jBtnEditarActionPerformed
 
     private void jBtnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSalvarActionPerformed
-        if(itens ==  null){
+        if (itens == null) {
             JOptionPane.showMessageDialog(this,
                     "Não Existem Produtos Nesta Venda");
             //return;
         }
-        
+
         int resp = JOptionPane.showConfirmDialog(this,
                 "Confirma a inclusão?",
                 "Incluir registro",
@@ -345,26 +345,27 @@ public class CadastroVendasInclui extends javax.swing.JDialog {
         if (resp != JOptionPane.YES_OPTION) {
             return;
         }
-        
+
         Venda v = new Venda();
-        
+
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
         try {
             v.setDataVenda(formato.parse(jFmtData.getText()));
         } catch (ParseException ex) {
             Logger.getLogger(CadastroVendasInclui.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         v.setItens(itens);
         v.setPrecoVenda(valor);
         v.setVendedor(vendedor);
-        
+
         for (VendaProduto iten : itens) {
             iten.setVenda(v);
         }
-        
+
         try {
             vService.salvar(v);
+            vService.UpdateEstoque();
         } catch (NegocioException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
@@ -373,7 +374,6 @@ public class CadastroVendasInclui extends javax.swing.JDialog {
     /**
      * @param args the command line arguments
      */
-    
     /*
     public static void main(String args[]) {
         
@@ -435,7 +435,7 @@ public class CadastroVendasInclui extends javax.swing.JDialog {
     private void atualizaDados() {
         valor = new Float(0);
         for (VendaProduto iten : itens) {
-            valor+=iten.getTotal();
+            valor += iten.getTotal();
         }
         jTxtValor.setText(String.valueOf(valor));
         ivTableModel = new ItensVendaTableModel(itens);

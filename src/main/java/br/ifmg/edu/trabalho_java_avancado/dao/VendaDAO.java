@@ -34,13 +34,20 @@ public class VendaDAO {
         return em.createQuery("from Venda v").getResultList();
     }
 
-    public void UpdateEstoque(Venda v){
+    public void UpdateEstoque(){
         /*
         Update venda join vendaproduto on (Venda_Id = vendaproduto.codVenda) 
         join produto on (vendaproduto.codProduto = produto.Prod_id) 
         SET ESTOQUE = produto.ESTOQUE+vendaproduto.QTDE
         where venda.Venda_Id=1;
         */
-        String sql = "Upda";
+        String f = "Select max(p.ID) from Venda p";
+        Integer a = em.createQuery(f, Integer.class).getSingleResult();
+        Venda v = buscarPorCodigo(a);
+        String sql = "UPDATE Produto FROM Venda v "
+                + "join VendaProduto v.itens vp join Produto vp.produto p "
+                + "SET p.Estoque = (p.Estoque - vp.qtde) WHERE v.ID = "+String.valueOf(v.getID());
+        
+        em.createQuery(sql).executeUpdate();
     }
 }
