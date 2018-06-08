@@ -62,6 +62,7 @@ public class VisaoPrincipal_Adm extends javax.swing.JFrame {
         jMenuVendas = new javax.swing.JMenu();
         jSubMenuVenda = new javax.swing.JMenuItem();
         jMenuRelatorios = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistema De Padaria");
@@ -177,6 +178,11 @@ public class VisaoPrincipal_Adm extends javax.swing.JFrame {
         jMenuAdm.add(jMenuVendas);
 
         jMenuRelatorios.setText("Relatórios");
+
+        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem1.setText("Vendas");
+        jMenuRelatorios.add(jMenuItem1);
+
         jMenuAdm.add(jMenuRelatorios);
 
         setJMenuBar(jMenuAdm);
@@ -256,6 +262,7 @@ public class VisaoPrincipal_Adm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JMenuBar jMenuAdm;
     private javax.swing.JMenu jMenuCadastro;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenu jMenuProducao;
     private javax.swing.JMenu jMenuRelatorios;
     private javax.swing.JMenu jMenuVendas;
