@@ -1,6 +1,7 @@
 package br.ifmg.edu.trabalho_java_avancado.service;
 
 import br.ifmg.edu.trabalho_java_avancado.dao.ProdutosTerceirosDAO;
+import br.ifmg.edu.trabalho_java_avancado.modelo.Produto;
 import br.ifmg.edu.trabalho_java_avancado.modelo.ProdutoTerceiros;
 import br.ifmg.edu.trabalho_java_avancado.util.NegocioException;
 import java.io.Serializable;
@@ -25,6 +26,10 @@ public class ProdutosTerceirosService implements Serializable{
     
     public void remover(ProdutoTerceiros f){
         fabDAO.remover(f);
+    }
+    
+    public void UpdateEstoque(Produto p, Integer qtde){
+        fabDAO.UpdateEstoque(p, qtde);
     }
     
     public ProdutoTerceiros buscarPorCodigo(Integer codigo){

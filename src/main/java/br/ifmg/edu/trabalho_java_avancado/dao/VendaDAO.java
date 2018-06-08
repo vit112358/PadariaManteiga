@@ -4,6 +4,8 @@ import br.ifmg.edu.trabalho_java_avancado.modelo.Venda;
 import br.ifmg.edu.trabalho_java_avancado.util.FabricaEntity;
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
 
 /**
  *
@@ -31,23 +33,12 @@ public class VendaDAO {
     }
     
     public List<Venda> buscarTodos(){
-        return em.createQuery("from Venda v").getResultList();
-    }
-
-    public void UpdateEstoque(){
-        /*
-        Update venda join vendaproduto on (Venda_Id = vendaproduto.codVenda) 
-        join produto on (vendaproduto.codProduto = produto.Prod_id) 
-        SET ESTOQUE = produto.ESTOQUE+vendaproduto.QTDE
-        where venda.Venda_Id=1;
-        */
-        String f = "Select max(p.ID) from Venda p";
-        Integer a = em.createQuery(f, Integer.class).getSingleResult();
-        Venda v = buscarPorCodigo(a);
-        String sql = "UPDATE Produto FROM Venda v "
-                + "join VendaProduto v.itens vp join Produto vp.produto p "
-                + "SET p.Estoque = (p.Estoque - vp.qtde) WHERE v.ID = "+String.valueOf(v.getID());
+        //return em.createQuery("from Venda v").getResultList();
+        CriteriaBuilder builder = em.getCriteriaBuilder();
+        CriteriaQuery<Venda> criteriaQuery = builder.createQuery(Venda.class);
+        criteriaQuery.from(Venda.class);
         
-        em.createQuery(sql).executeUpdate();
+        List<Venda> vendas = em.createQuery(criteriaQuery).getResultList();
+        return vendas;
     }
 }

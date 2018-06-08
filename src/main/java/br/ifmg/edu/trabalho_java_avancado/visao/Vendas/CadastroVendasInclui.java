@@ -3,6 +3,7 @@ package br.ifmg.edu.trabalho_java_avancado.visao.Vendas;
 import br.ifmg.edu.trabalho_java_avancado.modelo.Funcionario;
 import br.ifmg.edu.trabalho_java_avancado.modelo.Venda;
 import br.ifmg.edu.trabalho_java_avancado.modelo.VendaProduto;
+import br.ifmg.edu.trabalho_java_avancado.service.ProdutosTerceirosService;
 import br.ifmg.edu.trabalho_java_avancado.service.VendaService;
 import br.ifmg.edu.trabalho_java_avancado.util.NegocioException;
 import br.ifmg.edu.trabalho_java_avancado.visao.Vendas.itens.ItensVendaTableModel;
@@ -26,6 +27,7 @@ public class CadastroVendasInclui extends javax.swing.JDialog {
 
     private Funcionario vendedor;
     private VendaService vService;
+    private ProdutosTerceirosService pService = new ProdutosTerceirosService();
     private List<VendaProduto> itens = new ArrayList<>();
     private ItensVendaTableModel ivTableModel;
     private Float valor;
@@ -361,11 +363,13 @@ public class CadastroVendasInclui extends javax.swing.JDialog {
 
         for (VendaProduto iten : itens) {
             iten.setVenda(v);
+            pService.UpdateEstoque(iten.getProduto(), iten.getQtde());
         }
-
+        
+       
         try {
             vService.salvar(v);
-            vService.UpdateEstoque();
+            setVisible(false);
         } catch (NegocioException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }

@@ -8,6 +8,7 @@ import java.util.Objects;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -27,7 +28,8 @@ public class Venda implements Serializable {
     
     @OneToMany(mappedBy = "venda",
                cascade = CascadeType.ALL,
-               orphanRemoval = true)
+               orphanRemoval = true,
+               fetch = FetchType.EAGER)
     private List<VendaProduto> itens = new LinkedList<VendaProduto>();
     
     @ManyToOne
@@ -80,7 +82,7 @@ public class Venda implements Serializable {
     public void setItens(List<VendaProduto> itens) {
         this.itens = itens;
     }
-
+    
     @Override
     public String toString() {
         return "Venda{" + "ID=" + ID + ", itens=" + itens + ", vendedor=" + vendedor + ", DataVenda=" + DataVenda + ", PrecoVenda=" + PrecoVenda + '}';

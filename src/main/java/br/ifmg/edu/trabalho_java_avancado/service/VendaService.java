@@ -34,8 +34,4 @@ public class VendaService implements Serializable{
     public List<Venda> buscarTodos(){
         return fabDAO.buscarTodos();
     }
-    
-    public void UpdateEstoque(){
-        fabDAO.UpdateEstoque();
-    }
 }
