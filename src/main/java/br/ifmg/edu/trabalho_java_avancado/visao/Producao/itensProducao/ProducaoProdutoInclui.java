@@ -4,7 +4,6 @@ import br.ifmg.edu.trabalho_java_avancado.modelo.ItemProducao;
 import br.ifmg.edu.trabalho_java_avancado.modelo.Produto;
 import br.ifmg.edu.trabalho_java_avancado.modelo.ProdutoProduzido;
 import br.ifmg.edu.trabalho_java_avancado.service.ProdutosProduzidosService;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
 import javax.swing.DefaultComboBoxModel;
@@ -183,6 +182,13 @@ public class ProducaoProdutoInclui extends javax.swing.JDialog {
         ProdutoProduzido aux = (ProdutoProduzido) jCbxProdutos.getSelectedItem();
         p.setProd(aux);
         try {
+            if(Integer.parseInt(jFmtQtde.getText())<=0){
+                JOptionPane.showMessageDialog(this, "Para"
+                        + " cadastrar uma produção a quantidade deve ser maior "
+                        + "ou igual à zero!", "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            
             p.setQtde(Integer.parseInt(jFmtQtde.getText()));
 
             produtos.add(p);

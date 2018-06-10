@@ -367,7 +367,11 @@ public class CadastroVendasInclui extends javax.swing.JDialog {
             iten.setVenda(v);
             return iten;
         }).forEachOrdered((iten) -> {
-            pService.UpdateEstoque(iten.getProduto(), iten.getQtde());
+            try {
+                pService.UpdateEstoque(iten.getProduto(), iten.getQtde());
+            } catch (NegocioException ex) {
+                JOptionPane.showMessageDialog(this, ex.getMessage(),"Erro", JOptionPane.ERROR_MESSAGE);
+            }
         });
         
        
@@ -378,45 +382,6 @@ public class CadastroVendasInclui extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
     }//GEN-LAST:event_jBtnSalvarActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-    /*
-    public static void main(String args[]) {
-        
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CadastroVendasInclui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CadastroVendasInclui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CadastroVendasInclui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CadastroVendasInclui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        
-
-      
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                CadastroVendasInclui dialog = new CadastroVendasInclui(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
-    }*/
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnEditar;
@@ -442,9 +407,9 @@ public class CadastroVendasInclui extends javax.swing.JDialog {
 
     private void atualizaDados() {
         valor = new Float(0);
-        for (VendaProduto iten : itens) {
+        itens.forEach((iten) -> {
             valor += iten.getTotal();
-        }
+        });
         jTxtValor.setText(String.valueOf(valor));
         ivTableModel = new ItensVendaTableModel(itens);
         jTableVendaProd.setModel(ivTableModel);

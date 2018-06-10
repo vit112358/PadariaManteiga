@@ -2,7 +2,6 @@ package br.ifmg.edu.trabalho_java_avancado.visao.CadastroAdm;
 
 import br.ifmg.edu.trabalho_java_avancado.modelo.Adm;
 import br.ifmg.edu.trabalho_java_avancado.service.AdmService;
-import br.ifmg.edu.trabalho_java_avancado.util.NegocioException;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -77,9 +76,10 @@ public class CadastroAdmListagem extends javax.swing.JDialog {
         jTBBotoes.setBorder(javax.swing.BorderFactory.createTitledBorder("Cadastro - Administradores"));
         jTBBotoes.setRollover(true);
 
+        jBtnIncluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/add.png"))); // NOI18N
         jBtnIncluir.setText("Incluir");
         jBtnIncluir.setFocusable(false);
-        jBtnIncluir.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jBtnIncluir.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         jBtnIncluir.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jBtnIncluir.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -93,9 +93,10 @@ public class CadastroAdmListagem extends javax.swing.JDialog {
         });
         jTBBotoes.add(jBtnIncluir);
 
+        jBtnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/pencil-edit-button (1).png"))); // NOI18N
         jBtnEditar.setText("Editar");
         jBtnEditar.setFocusable(false);
-        jBtnEditar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jBtnEditar.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         jBtnEditar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jBtnEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -104,9 +105,10 @@ public class CadastroAdmListagem extends javax.swing.JDialog {
         });
         jTBBotoes.add(jBtnEditar);
 
+        jBtnRemover.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/remove (2).png"))); // NOI18N
         jBtnRemover.setText("Remover");
         jBtnRemover.setFocusable(false);
-        jBtnRemover.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jBtnRemover.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         jBtnRemover.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jBtnRemover.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -217,32 +219,29 @@ public class CadastroAdmListagem extends javax.swing.JDialog {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CadastroAdmListagem.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CadastroAdmListagem.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CadastroAdmListagem.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(CadastroAdmListagem.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
+        
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                CadastroAdmListagem dialog = new CadastroAdmListagem(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            CadastroAdmListagem dialog = new CadastroAdmListagem(new javax.swing.JFrame(), true);
+            dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                @Override
+                public void windowClosing(java.awt.event.WindowEvent e) {
+                    System.exit(0);
+                }
+            });
+            dialog.setVisible(true);
         });
     }
 

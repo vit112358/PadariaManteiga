@@ -1,14 +1,8 @@
 package br.ifmg.edu.trabalho_java_avancado.visao.CadastroAdm;
 
 import br.ifmg.edu.trabalho_java_avancado.modelo.Adm;
-import br.ifmg.edu.trabalho_java_avancado.modelo.Vendedor;
 import br.ifmg.edu.trabalho_java_avancado.service.AdmService;
-import br.ifmg.edu.trabalho_java_avancado.service.VendedorService;
 import br.ifmg.edu.trabalho_java_avancado.util.NegocioException;
-import java.util.Date;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
@@ -214,19 +208,25 @@ public class CadastroAdmInclui extends javax.swing.JDialog {
         
         if(t.equals(t1)){
             Adm v = new Adm();
+            
+            if((Integer)jSpinIdade.getValue()<=0){
+                JOptionPane.showMessageDialog(this, "Digite uma idade válida!","Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            
             v.setIdade((Integer)jSpinIdade.getValue());
             v.setLogin(jTxtLogin.getText());
             v.setNome(jTxtNome.getText());
             v.setSenha(t);
             try {
                 aService.salvar(v);
+                setVisible(false);
             } catch (NegocioException ex) {
-                JOptionPane.showMessageDialog(this, ex.getMessage());
+                JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
             }
         }else{
             JOptionPane.showMessageDialog(this, 
                     "Verifique as Senhas");            
-            return;
         }
     }//GEN-LAST:event_jBtnSalvaActionPerformed
 

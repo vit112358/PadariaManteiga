@@ -82,9 +82,10 @@ public class CadastroVendasListagem extends javax.swing.JDialog {
         jTBBotoes.setBorder(javax.swing.BorderFactory.createTitledBorder("Cadastro - Vendedores"));
         jTBBotoes.setRollover(true);
 
+        jBtnIncluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/add.png"))); // NOI18N
         jBtnIncluir.setText("Incluir");
         jBtnIncluir.setFocusable(false);
-        jBtnIncluir.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jBtnIncluir.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         jBtnIncluir.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jBtnIncluir.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -98,9 +99,10 @@ public class CadastroVendasListagem extends javax.swing.JDialog {
         });
         jTBBotoes.add(jBtnIncluir);
 
+        jBtnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/pencil-edit-button (1).png"))); // NOI18N
         jBtnEditar.setText("Editar");
         jBtnEditar.setFocusable(false);
-        jBtnEditar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jBtnEditar.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         jBtnEditar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jBtnEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -109,9 +111,10 @@ public class CadastroVendasListagem extends javax.swing.JDialog {
         });
         jTBBotoes.add(jBtnEditar);
 
+        jBtnRemover.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/remove (2).png"))); // NOI18N
         jBtnRemover.setText("Remover");
         jBtnRemover.setFocusable(false);
-        jBtnRemover.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jBtnRemover.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         jBtnRemover.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jBtnRemover.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

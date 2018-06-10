@@ -136,7 +136,7 @@ public class CadastroProducaoInclui extends javax.swing.JDialog {
 
         jLabel1.setText("Data:");
 
-        jFmtData.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("d/M/yy"))));
+        jFmtData.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("d/M/yyyy"))));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -263,16 +263,20 @@ public class CadastroProducaoInclui extends javax.swing.JDialog {
         itens.forEach((iten) -> {
             iten.setProducao(p);
         });
-        
+
         itens.forEach((iten) -> {
-            pService.UpdateEstoqueProducao(iten.getProd(), iten.getQtde());
+            try {
+                pService.UpdateEstoqueProducao(iten.getProd(), iten.getQtde());
+            } catch (NegocioException ex) {
+                JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+            }
         });
 
         for (int i = 0; i < p.getProdutos_feitos().size(); i++) {
             p.getProdutos_feitos().get(i).getProd().setEstoque(
-                    p.getProdutos_feitos().get(i).getProd().getEstoque()+p.getProdutos_feitos().get(i).getQtde());
+                    p.getProdutos_feitos().get(i).getProd().getEstoque() + p.getProdutos_feitos().get(i).getQtde());
         }
-        
+
         try {
             pService.salvar(p);
         } catch (NegocioException ex) {
@@ -344,7 +348,7 @@ public class CadastroProducaoInclui extends javax.swing.JDialog {
 
     private void atualizaDados() {
         String[] cols = {"Nome", "Quantidade"};
-        iProducao = new itensProducaoTableModel(itens,cols);
+        iProducao = new itensProducaoTableModel(itens, cols);
         jTableProdutos.setModel(iProducao);
     }
 }

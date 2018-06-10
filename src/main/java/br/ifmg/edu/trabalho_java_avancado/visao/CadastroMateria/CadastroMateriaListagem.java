@@ -1,16 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.ifmg.edu.trabalho_java_avancado.visao.CadastroMateria;
 
 import br.ifmg.edu.trabalho_java_avancado.modelo.Materia_Prima;
-import br.ifmg.edu.trabalho_java_avancado.visao.CadastroVendedores.*;
-import br.ifmg.edu.trabalho_java_avancado.modelo.Vendedor;
 import br.ifmg.edu.trabalho_java_avancado.service.Materia_PrimaService;
-import br.ifmg.edu.trabalho_java_avancado.service.VendedorService;
-import br.ifmg.edu.trabalho_java_avancado.util.NegocioException;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -85,9 +76,10 @@ public class CadastroMateriaListagem extends javax.swing.JDialog {
         jTBBotoes.setBorder(javax.swing.BorderFactory.createTitledBorder("Cadastro - Matérias-Primas"));
         jTBBotoes.setRollover(true);
 
+        jBtnIncluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/add.png"))); // NOI18N
         jBtnIncluir.setText("Incluir");
         jBtnIncluir.setFocusable(false);
-        jBtnIncluir.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jBtnIncluir.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         jBtnIncluir.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jBtnIncluir.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -101,9 +93,10 @@ public class CadastroMateriaListagem extends javax.swing.JDialog {
         });
         jTBBotoes.add(jBtnIncluir);
 
+        jBtnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/pencil-edit-button (1).png"))); // NOI18N
         jBtnEditar.setText("Editar");
         jBtnEditar.setFocusable(false);
-        jBtnEditar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jBtnEditar.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         jBtnEditar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jBtnEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -112,9 +105,10 @@ public class CadastroMateriaListagem extends javax.swing.JDialog {
         });
         jTBBotoes.add(jBtnEditar);
 
+        jBtnRemover.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/remove (2).png"))); // NOI18N
         jBtnRemover.setText("Remover");
         jBtnRemover.setFocusable(false);
-        jBtnRemover.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jBtnRemover.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         jBtnRemover.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jBtnRemover.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -225,32 +219,29 @@ public class CadastroMateriaListagem extends javax.swing.JDialog {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CadastroMateriaListagem.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CadastroMateriaListagem.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CadastroMateriaListagem.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(CadastroMateriaListagem.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
+        
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                CadastroMateriaListagem dialog = new CadastroMateriaListagem(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            CadastroMateriaListagem dialog = new CadastroMateriaListagem(new javax.swing.JFrame(), true);
+            dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                @Override
+                public void windowClosing(java.awt.event.WindowEvent e) {
+                    System.exit(0);
+                }
+            });
+            dialog.setVisible(true);
         });
     }
 

@@ -182,6 +182,14 @@ public class VendaProdutoInclui extends javax.swing.JDialog {
         VendaProduto p = new VendaProduto();
         Produto aux = (Produto) jCbxProdutos.getSelectedItem();
         p.setProduto(aux);
+        
+        if(Integer.parseInt(jfmtValor.getText())<=0){
+            JOptionPane.showMessageDialog(this, "Para"
+                        + " cadastrar uma venda a quantidade deve ser maior "
+                        + "ou que zero!", "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+        }
+        
         p.setQtde(Integer.parseInt(jfmtValor.getText()));
         p.setValor(aux.getPrecoVenda());
         p.setTotal(aux.getPrecoVenda()*Integer.parseInt(jfmtValor.getText()));
