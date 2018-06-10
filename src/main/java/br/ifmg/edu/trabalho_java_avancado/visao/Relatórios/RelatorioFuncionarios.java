@@ -12,7 +12,7 @@ import javax.swing.JOptionPane;
  *
  * @author Vitor
  */
-public class RelatorioVenda extends javax.swing.JDialog {
+public class RelatorioFuncionarios extends javax.swing.JDialog {
 
     private RelatorioUtils util;
 
@@ -22,10 +22,13 @@ public class RelatorioVenda extends javax.swing.JDialog {
      * @param parent Janela Pai
      * @param modal Para definir se é modal ou não
      */
-    public RelatorioVenda(java.awt.Frame parent, boolean modal) {
+    public RelatorioFuncionarios(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         util = new RelatorioUtils();
+
+        jFmtDataFim.setEnabled(false);
+        jFmtDataInício.setEnabled(false);
     }
 
     /**
@@ -38,9 +41,8 @@ public class RelatorioVenda extends javax.swing.JDialog {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
+        buttonGroup2 = new javax.swing.ButtonGroup();
         jPanel2 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jTxtCodVendedor = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -50,6 +52,9 @@ public class RelatorioVenda extends javax.swing.JDialog {
         jLabel4 = new javax.swing.JLabel();
         jRadioPDF = new javax.swing.JRadioButton();
         jRadioVis = new javax.swing.JRadioButton();
+        jPanel5 = new javax.swing.JPanel();
+        jRadioAdm = new javax.swing.JRadioButton();
+        jRadioVendedores = new javax.swing.JRadioButton();
         jPanel1 = new javax.swing.JPanel();
         jBtnGera = new javax.swing.JButton();
         jBtnFecha = new javax.swing.JButton();
@@ -59,9 +64,7 @@ public class RelatorioVenda extends javax.swing.JDialog {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Filtros"));
 
-        jLabel1.setText("Código do Vendedor:");
-
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Filtro por Data:"));
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Filtro por Data de Admissão:"));
 
         jLabel2.setText("Data de Início:");
 
@@ -86,7 +89,7 @@ public class RelatorioVenda extends javax.swing.JDialog {
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jFmtDataFim, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(71, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -135,6 +138,43 @@ public class RelatorioVenda extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Tipo"));
+
+        buttonGroup2.add(jRadioAdm);
+        jRadioAdm.setText("Administradores");
+        jRadioAdm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioAdmActionPerformed(evt);
+            }
+        });
+
+        buttonGroup2.add(jRadioVendedores);
+        jRadioVendedores.setText("Vendedores");
+        jRadioVendedores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioVendedoresActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jRadioAdm)
+                    .addComponent(jRadioVendedores))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addComponent(jRadioAdm)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jRadioVendedores))
+        );
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -143,20 +183,14 @@ public class RelatorioVenda extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTxtCodVendedor, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jTxtCodVendedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -208,7 +242,7 @@ public class RelatorioVenda extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -221,7 +255,7 @@ public class RelatorioVenda extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        setSize(new java.awt.Dimension(363, 351));
+        setSize(new java.awt.Dimension(363, 400));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -232,7 +266,18 @@ public class RelatorioVenda extends javax.swing.JDialog {
 
     private void jBtnGeraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnGeraActionPerformed
 
-        Date data1 = null;
+        if (!(jRadioAdm.isSelected()) && !(jRadioVendedores.isSelected())
+                && (jFmtDataFim.getText().equals("") || jFmtDataFim.getText().trim().equals(""))
+                && (jFmtDataInício.getText().equals("") || jFmtDataInício.getText().trim().equals(""))) {
+            if (jRadioVis.isSelected()) {
+                util.VisualizaRelatorio("Relatório_Funcionário.jasper");
+            } else if (jRadioPDF.isSelected()) {
+                util.GeraRelatorio("Relatório_Funcionário.jasper", "Relatório_Funcionários.pdf");
+            } else {
+                JOptionPane.showMessageDialog(this, "Escolha um modo de Visualização", "Erro", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        /*Date data1 = null;
         Date data2 = null;
         if ((jTxtCodVendedor.getText().equals("") || jTxtCodVendedor.getText().trim().equals(""))
                 && (jFmtDataFim.getText().equals("") || jFmtDataFim.getText().trim().equals(""))
@@ -269,7 +314,7 @@ public class RelatorioVenda extends javax.swing.JDialog {
         } else if ((jTxtCodVendedor.getText().equals("") || jTxtCodVendedor.getText().trim().equals(""))
                 && !(jFmtDataFim.getText().equals("") || jFmtDataFim.getText().trim().equals(""))
                 && !(jFmtDataInício.getText().equals("") || jFmtDataInício.getText().trim().equals(""))) {
-
+            
             HashMap<String, Object> parametros = new LinkedHashMap<>();
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
             try {
@@ -279,11 +324,11 @@ public class RelatorioVenda extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(this, "Verifique as Datas", "Erro", JOptionPane.ERROR_MESSAGE);
                 return;
             }
-            
+
             if (data1.before(data2)) {
                 parametros.put("DataInicio", data1);
                 parametros.put("DataFim", data2);
-
+                
             } else if (data1.after(data2)) {
                 parametros.put("DataInicio", data2);
                 parametros.put("DataFim", data1);
@@ -291,7 +336,7 @@ public class RelatorioVenda extends javax.swing.JDialog {
             } else {
                 JOptionPane.showMessageDialog(this, "As datas são iguais", "Aviso", JOptionPane.WARNING_MESSAGE);
             }
-
+            
             if (jRadioVis.isSelected()) {
                 util.VisualizaRelatorioParametro("Relatório_Venda_Data.jasper", parametros);
             } else if (jRadioPDF.isSelected()) {
@@ -299,48 +344,22 @@ public class RelatorioVenda extends javax.swing.JDialog {
             } else {
                 JOptionPane.showMessageDialog(this, "Escolha um modo de Visualização", "Erro", JOptionPane.ERROR_MESSAGE);
             }
-        } else {
-            HashMap<String, Object> parametros = new LinkedHashMap<>();
-            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-            try {
-                data1 = new java.sql.Date(sdf.parse(jFmtDataInício.getText()).getTime());
-                data2 = new java.sql.Date(sdf.parse(jFmtDataFim.getText()).getTime());
-            } catch (ParseException ex) {
-                JOptionPane.showMessageDialog(this, "Verifique as Datas", "Erro", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-
-            Integer codigo;
-            try {
-                codigo = Integer.parseInt(jTxtCodVendedor.getText());
-            } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(this, "Digite um Código válido!", "Erro", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-            
-            parametros.put("codigoVendedor", codigo);
-            
-            if (data1.before(data2)) {
-                parametros.put("DataInicio", data1);
-                parametros.put("DataFim", data2);
-
-            } else if (data1.after(data2)) {
-                parametros.put("DataInicio", data2);
-                parametros.put("DataFim", data1);
-                JOptionPane.showMessageDialog(this, "As datas estão invertidas", "Aviso", JOptionPane.WARNING_MESSAGE);
-            } else {
-                JOptionPane.showMessageDialog(this, "As datas são iguais", "Aviso", JOptionPane.WARNING_MESSAGE);
-            }
-
-            if (jRadioVis.isSelected()) {
-                util.VisualizaRelatorioParametro("Relatório_Venda_Código_Data.jasper", parametros);
-            } else if (jRadioPDF.isSelected()) {
-                util.GeraRelatorioParametro("Relatório_Venda_Código_Data.jasper", "Relatório_Venda_Código_Data.pdf", parametros);
-            } else {
-                JOptionPane.showMessageDialog(this, "Escolha um modo de Visualização", "Erro", JOptionPane.ERROR_MESSAGE);
-            }
-        }
+        }*/
     }//GEN-LAST:event_jBtnGeraActionPerformed
+
+    private void jRadioAdmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioAdmActionPerformed
+        if (jRadioAdm.isSelected()) {
+            jFmtDataFim.setText("");
+            jFmtDataInício.setText("");
+            jFmtDataFim.setEnabled(false);
+            jFmtDataInício.setEnabled(false);
+        }
+    }//GEN-LAST:event_jRadioAdmActionPerformed
+
+    private void jRadioVendedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioVendedoresActionPerformed
+        jFmtDataFim.setEnabled(true);
+        jFmtDataInício.setEnabled(true);
+    }//GEN-LAST:event_jRadioVendedoresActionPerformed
 
     /**
      * @param args the command line arguments
@@ -359,15 +378,16 @@ public class RelatorioVenda extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(RelatorioVenda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RelatorioFuncionarios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(() -> {
-            RelatorioVenda dialog = new RelatorioVenda(new javax.swing.JFrame(), true);
+            RelatorioFuncionarios dialog = new RelatorioFuncionarios(new javax.swing.JFrame(), true);
             dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                 @Override
                 public void windowClosing(java.awt.event.WindowEvent e) {
@@ -380,11 +400,11 @@ public class RelatorioVenda extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JButton jBtnFecha;
     private javax.swing.JButton jBtnGera;
     private javax.swing.JFormattedTextField jFmtDataFim;
     private javax.swing.JFormattedTextField jFmtDataInício;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -392,8 +412,10 @@ public class RelatorioVenda extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JRadioButton jRadioAdm;
     private javax.swing.JRadioButton jRadioPDF;
+    private javax.swing.JRadioButton jRadioVendedores;
     private javax.swing.JRadioButton jRadioVis;
-    private javax.swing.JTextField jTxtCodVendedor;
     // End of variables declaration//GEN-END:variables
 }

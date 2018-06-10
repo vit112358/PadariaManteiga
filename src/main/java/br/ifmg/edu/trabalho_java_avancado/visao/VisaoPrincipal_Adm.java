@@ -8,6 +8,7 @@ import br.ifmg.edu.trabalho_java_avancado.visao.CadastroVendedores.CadastroVende
 import br.ifmg.edu.trabalho_java_avancado.visao.CadastroFornecedor.CadastroFornecedorListagem;
 import br.ifmg.edu.trabalho_java_avancado.visao.CadastroProdProduzidos.CadastroProdProduzidosListagem;
 import br.ifmg.edu.trabalho_java_avancado.visao.Producao.CadastroProducaoListagem;
+import br.ifmg.edu.trabalho_java_avancado.visao.Relatórios.RelatorioFuncionarios;
 import br.ifmg.edu.trabalho_java_avancado.visao.Relatórios.RelatorioVenda;
 import br.ifmg.edu.trabalho_java_avancado.visao.Vendas.CadastroVendasListagem;
 import java.awt.event.ActionEvent;
@@ -55,14 +56,21 @@ public class VisaoPrincipal_Adm extends javax.swing.JFrame {
         jSubMenuAdm = new javax.swing.JMenuItem();
         jSubMenuFornecedor = new javax.swing.JMenuItem();
         jSubMenuMateria = new javax.swing.JMenuItem();
-        jSubMenuProdTerc = new javax.swing.JMenuItem();
         jSubMenuProdProduzido = new javax.swing.JMenuItem();
+        jSubMenuProdTerc = new javax.swing.JMenuItem();
         jSubMenuVendedor = new javax.swing.JMenuItem();
         jMenuProducao = new javax.swing.JMenu();
         jSubMenuIniciaProducao = new javax.swing.JMenuItem();
         jMenuVendas = new javax.swing.JMenu();
         jSubMenuVenda = new javax.swing.JMenuItem();
         jMenuRelatorios = new javax.swing.JMenu();
+        jMenuListagens = new javax.swing.JMenu();
+        jMIAdm = new javax.swing.JMenuItem();
+        jMIFornecedores = new javax.swing.JMenuItem();
+        jMIMP = new javax.swing.JMenuItem();
+        jMIProdProduzidos = new javax.swing.JMenuItem();
+        jMIProdTerceirizados = new javax.swing.JMenuItem();
+        jMIVenda = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -123,15 +131,6 @@ public class VisaoPrincipal_Adm extends javax.swing.JFrame {
         });
         jMenuCadastro.add(jSubMenuMateria);
 
-        jSubMenuProdTerc.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.CTRL_MASK));
-        jSubMenuProdTerc.setText("Produtos Terceirizados");
-        jSubMenuProdTerc.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jSubMenuProdTercActionPerformed(evt);
-            }
-        });
-        jMenuCadastro.add(jSubMenuProdTerc);
-
         jSubMenuProdProduzido.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.CTRL_MASK));
         jSubMenuProdProduzido.setText("Produtos Produzidos");
         jSubMenuProdProduzido.addActionListener(new java.awt.event.ActionListener() {
@@ -140,6 +139,15 @@ public class VisaoPrincipal_Adm extends javax.swing.JFrame {
             }
         });
         jMenuCadastro.add(jSubMenuProdProduzido);
+
+        jSubMenuProdTerc.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.CTRL_MASK));
+        jSubMenuProdTerc.setText("Produtos Terceirizados");
+        jSubMenuProdTerc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jSubMenuProdTercActionPerformed(evt);
+            }
+        });
+        jMenuCadastro.add(jSubMenuProdTerc);
 
         jSubMenuVendedor.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.event.InputEvent.CTRL_MASK));
         jSubMenuVendedor.setText("Vendedores");
@@ -155,7 +163,7 @@ public class VisaoPrincipal_Adm extends javax.swing.JFrame {
         jMenuProducao.setText("Produção");
 
         jSubMenuIniciaProducao.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.ALT_MASK | java.awt.event.InputEvent.CTRL_MASK));
-        jSubMenuIniciaProducao.setText("Registrar Produção");
+        jSubMenuIniciaProducao.setText("Produções");
         jSubMenuIniciaProducao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jSubMenuIniciaProducaoActionPerformed(evt);
@@ -180,13 +188,41 @@ public class VisaoPrincipal_Adm extends javax.swing.JFrame {
 
         jMenuRelatorios.setText("Relatórios");
 
-        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem1.setText("Vendas");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        jMenuListagens.setText("Listagens");
+
+        jMIAdm.setText("Administradores/Vendedores");
+        jMIAdm.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                jMIAdmActionPerformed(evt);
             }
         });
+        jMenuListagens.add(jMIAdm);
+
+        jMIFornecedores.setText("Fornecedores");
+        jMenuListagens.add(jMIFornecedores);
+
+        jMIMP.setText("Matérias-Primas");
+        jMenuListagens.add(jMIMP);
+
+        jMIProdProduzidos.setText("Produtos Produzidos");
+        jMenuListagens.add(jMIProdProduzidos);
+
+        jMIProdTerceirizados.setText("Produtos Terceirizados");
+        jMenuListagens.add(jMIProdTerceirizados);
+
+        jMenuRelatorios.add(jMenuListagens);
+
+        jMIVenda.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
+        jMIVenda.setText("Vendas");
+        jMIVenda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMIVendaActionPerformed(evt);
+            }
+        });
+        jMenuRelatorios.add(jMIVenda);
+
+        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem1.setText("Produções");
         jMenuRelatorios.add(jMenuItem1);
 
         jMenuAdm.add(jMenuRelatorios);
@@ -263,17 +299,30 @@ public class VisaoPrincipal_Adm extends javax.swing.JFrame {
         dialog.setVisible(true);
     }//GEN-LAST:event_jSubMenuIniciaProducaoActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void jMIVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIVendaActionPerformed
         RelatorioVenda dialog = new RelatorioVenda(this, false);
         dialog.setVisible(true);
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_jMIVendaActionPerformed
+
+    private void jMIAdmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIAdmActionPerformed
+        // TODO add your handling code here:
+        RelatorioFuncionarios dialog = new RelatorioFuncionarios(this, false);
+        dialog.setVisible(true);
+    }//GEN-LAST:event_jMIAdmActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JMenuItem jMIAdm;
+    private javax.swing.JMenuItem jMIFornecedores;
+    private javax.swing.JMenuItem jMIMP;
+    private javax.swing.JMenuItem jMIProdProduzidos;
+    private javax.swing.JMenuItem jMIProdTerceirizados;
+    private javax.swing.JMenuItem jMIVenda;
     private javax.swing.JMenuBar jMenuAdm;
     private javax.swing.JMenu jMenuCadastro;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenu jMenuListagens;
     private javax.swing.JMenu jMenuProducao;
     private javax.swing.JMenu jMenuRelatorios;
     private javax.swing.JMenu jMenuVendas;
