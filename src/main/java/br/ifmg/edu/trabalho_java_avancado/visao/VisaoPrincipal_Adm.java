@@ -8,6 +8,7 @@ import br.ifmg.edu.trabalho_java_avancado.visao.CadastroVendedores.CadastroVende
 import br.ifmg.edu.trabalho_java_avancado.visao.CadastroFornecedor.CadastroFornecedorListagem;
 import br.ifmg.edu.trabalho_java_avancado.visao.CadastroProdProduzidos.CadastroProdProduzidosListagem;
 import br.ifmg.edu.trabalho_java_avancado.visao.Producao.CadastroProducaoListagem;
+import br.ifmg.edu.trabalho_java_avancado.visao.Relatórios.RelatorioVenda;
 import br.ifmg.edu.trabalho_java_avancado.visao.Vendas.CadastroVendasListagem;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -154,7 +155,7 @@ public class VisaoPrincipal_Adm extends javax.swing.JFrame {
         jMenuProducao.setText("Produção");
 
         jSubMenuIniciaProducao.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.ALT_MASK | java.awt.event.InputEvent.CTRL_MASK));
-        jSubMenuIniciaProducao.setText("Cadastra Produção");
+        jSubMenuIniciaProducao.setText("Registrar Produção");
         jSubMenuIniciaProducao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jSubMenuIniciaProducaoActionPerformed(evt);
@@ -181,6 +182,11 @@ public class VisaoPrincipal_Adm extends javax.swing.JFrame {
 
         jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem1.setText("Vendas");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
         jMenuRelatorios.add(jMenuItem1);
 
         jMenuAdm.add(jMenuRelatorios);
@@ -257,6 +263,11 @@ public class VisaoPrincipal_Adm extends javax.swing.JFrame {
         dialog.setVisible(true);
     }//GEN-LAST:event_jSubMenuIniciaProducaoActionPerformed
 
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        RelatorioVenda dialog = new RelatorioVenda(this, false);
+        dialog.setVisible(true);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
@@ -302,7 +313,7 @@ public class VisaoPrincipal_Adm extends javax.swing.JFrame {
         int sem = hora.get(Calendar.DAY_OF_WEEK);
         String semana = "";
         switch (sem){
-            case 0: semana = "Sábado";break;
+            case 7: semana = "Sábado";break;
             case 1: semana = "Domingo";break;
             case 2: semana = "Segunda-feira";break;
             case 3: semana = "Terça-feira";break;

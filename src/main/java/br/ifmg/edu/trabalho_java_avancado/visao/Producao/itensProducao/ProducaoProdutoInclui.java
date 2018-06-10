@@ -4,6 +4,7 @@ import br.ifmg.edu.trabalho_java_avancado.modelo.ItemProducao;
 import br.ifmg.edu.trabalho_java_avancado.modelo.Produto;
 import br.ifmg.edu.trabalho_java_avancado.modelo.ProdutoProduzido;
 import br.ifmg.edu.trabalho_java_avancado.service.ProdutosProduzidosService;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
 import javax.swing.DefaultComboBoxModel;
@@ -16,7 +17,6 @@ import javax.swing.JOptionPane;
  */
 public class ProducaoProdutoInclui extends javax.swing.JDialog {
 
-    
     private List<ItemProducao> produtos;
 
     //Estou reutilizando o objeto da camada de serviço da tela de listagem,
@@ -57,8 +57,6 @@ public class ProducaoProdutoInclui extends javax.swing.JDialog {
         jLabel4.setText("Quantidade:");
 
         jCbxProdutos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jFmtQtde.setText("0,00");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -176,13 +174,23 @@ public class ProducaoProdutoInclui extends javax.swing.JDialog {
             return;
         }
 
+        if (jFmtQtde.getText().contains(",")) {
+            String replace;
+            replace = jFmtQtde.getText().replace(",", ".");
+        }
+
         ItemProducao p = new ItemProducao();
         ProdutoProduzido aux = (ProdutoProduzido) jCbxProdutos.getSelectedItem();
         p.setProd(aux);
-        p.setQtde(Integer.parseInt(jFmtQtde.getText()));   
-        
-        produtos.add(p);
-        setVisible(false);
+        try {
+            p.setQtde(Integer.parseInt(jFmtQtde.getText()));
+
+            produtos.add(p);
+            setVisible(false);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Digite um número válido!", "Erro Numérico", JOptionPane.ERROR_MESSAGE);
+        }
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
@@ -202,9 +210,17 @@ public class ProducaoProdutoInclui extends javax.swing.JDialog {
 
         //O construtor do DefaultComboBoxModel aceita apenas
         //vector ou array. Assim, criei um vector com os daddos do BD.
-        Vector<Produto> produtos = new Vector<>(PTService.buscarTodos());
+        Vector<Produto> produtositens = new Vector<>(PTService.buscarTodos());
+        Vector<Produto> aux = new Vector<>(PTService.buscarTodos());
+        
+        aux.forEach((produto) -> {
+            produtos.stream().filter((produto1) -> (produto1.getProd().equals(produto))).forEachOrdered((_item) -> {
+                produtositens.remove(produto);
+            });
+        });
+        
         DefaultComboBoxModel dcmDono
-                = new DefaultComboBoxModel(produtos);
+                = new DefaultComboBoxModel(produtositens);
         jCbxProdutos.setModel(dcmDono);
     }
 }

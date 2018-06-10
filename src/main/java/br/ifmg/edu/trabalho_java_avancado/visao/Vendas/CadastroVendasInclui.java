@@ -200,7 +200,7 @@ public class CadastroVendasInclui extends javax.swing.JDialog {
 
         jLabel1.setText("Data: ");
 
-        jFmtData.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("d/M/yy"))));
+        jFmtData.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("d/M/yyyy"))));
 
         jLabel2.setText("Valor: ");
 
@@ -332,10 +332,10 @@ public class CadastroVendasInclui extends javax.swing.JDialog {
     }//GEN-LAST:event_jBtnEditarActionPerformed
 
     private void jBtnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSalvarActionPerformed
-        if (itens == null) {
+        if (itens.isEmpty()) {
             JOptionPane.showMessageDialog(this,
                     "Não Existem Produtos Nesta Venda");
-            //return;
+            return;
         }
 
         int resp = JOptionPane.showConfirmDialog(this,
@@ -351,8 +351,10 @@ public class CadastroVendasInclui extends javax.swing.JDialog {
         Venda v = new Venda();
 
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        
         try {
-            v.setDataVenda(formato.parse(jFmtData.getText()));
+            Date data = formato.parse(jFmtData.getText());
+            v.setDataVenda(data);        
         } catch (ParseException ex) {
             Logger.getLogger(CadastroVendasInclui.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -361,10 +363,12 @@ public class CadastroVendasInclui extends javax.swing.JDialog {
         v.setPrecoVenda(valor);
         v.setVendedor(vendedor);
 
-        for (VendaProduto iten : itens) {
+        itens.stream().map((iten) -> {
             iten.setVenda(v);
+            return iten;
+        }).forEachOrdered((iten) -> {
             pService.UpdateEstoque(iten.getProduto(), iten.getQtde());
-        }
+        });
         
        
         try {

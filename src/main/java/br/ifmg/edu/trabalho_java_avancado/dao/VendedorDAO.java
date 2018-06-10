@@ -46,7 +46,7 @@ public class VendedorDAO {
         return v;
     }
     
-    public boolean isLoginValido(String login, String senha){
+    public Vendedor isLoginValido(String login, String senha){
         
         String sql = "Select u from Funcionario u "
                    + "where u.login = ?1 and u.senha = ?2";
@@ -57,9 +57,9 @@ public class VendedorDAO {
                          .getSingleResult();
         
         if (user != null)
-           return true;       
+           return user;       
         
-        return false;
+        return null;
         
     }
     

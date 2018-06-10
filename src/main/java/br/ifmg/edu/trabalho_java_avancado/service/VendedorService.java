@@ -40,7 +40,7 @@ public class VendedorService implements Serializable{
         return v;
     }
     
-    public Boolean loginValido(String login, String senha) throws NegocioException{
+    public Vendedor loginValido(String login, String senha) throws NegocioException{
         
         if (login == null || senha == null)
           throw new NegocioException("Informe o nome e senha do usuário");

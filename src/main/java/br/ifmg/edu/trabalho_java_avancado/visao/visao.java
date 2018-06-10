@@ -2,7 +2,6 @@
 package br.ifmg.edu.trabalho_java_avancado.visao;
 
 import br.ifmg.edu.trabalho_java_avancado.modelo.Vendedor;
-import br.ifmg.edu.trabalho_java_avancado.service.VendaService;
 import br.ifmg.edu.trabalho_java_avancado.service.VendedorService;
 import br.ifmg.edu.trabalho_java_avancado.util.NegocioException;
 

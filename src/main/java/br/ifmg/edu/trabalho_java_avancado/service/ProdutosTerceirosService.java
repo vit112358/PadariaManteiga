@@ -28,7 +28,13 @@ public class ProdutosTerceirosService implements Serializable{
         fabDAO.remover(f);
     }
     
-    public void UpdateEstoque(Produto p, Integer qtde){
+    public void UpdateEstoque(Produto p, Integer qtde) throws NegocioException{
+        if(p.getEstoque()-qtde<0){
+            throw new NegocioException("Quantidade indisponível no Estoque!");
+        }else if(qtde <= 0){
+            throw new NegocioException("Quantidade Inválida!");
+        }
+        
         fabDAO.UpdateEstoque(p, qtde);
     }
     

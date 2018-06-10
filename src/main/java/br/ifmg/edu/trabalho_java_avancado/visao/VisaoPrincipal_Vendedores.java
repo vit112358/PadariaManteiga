@@ -1,5 +1,7 @@
 package br.ifmg.edu.trabalho_java_avancado.visao;
 
+import br.ifmg.edu.trabalho_java_avancado.modelo.Vendedor;
+import br.ifmg.edu.trabalho_java_avancado.visao.Vendas.CadastroVendasListagem;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.DecimalFormat;
@@ -11,15 +13,20 @@ import javax.swing.Timer;
  * @author Vitor
  */
 public class VisaoPrincipal_Vendedores extends javax.swing.JFrame {
-
+    
+    private Vendedor v;
+    
     /**
      * Creates new form VisaoPrincipal_Vendedores
+     * @param vendedor Vendedor Logado
      */
-    public VisaoPrincipal_Vendedores() {
+    public VisaoPrincipal_Vendedores(Vendedor vendedor) {
         initComponents();
         
         Timer timer = new Timer(1000,ativar);
         timer.start();
+        
+        this.v = vendedor;
     }
 
     /**
@@ -35,6 +42,7 @@ public class VisaoPrincipal_Vendedores extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jlblHora = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         jMenuAdm = new javax.swing.JMenuBar();
         jMenuVendasFunc = new javax.swing.JMenu();
         jSubMenuVendas = new javax.swing.JMenuItem();
@@ -66,10 +74,17 @@ public class VisaoPrincipal_Vendedores extends javax.swing.JFrame {
         jLabel3.setText("Panificadora Chega Manteiga,Derrete!");
         jLabel3.setToolTipText("");
 
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/pao.png"))); // NOI18N
+
         jMenuVendasFunc.setText("Vendas");
 
         jSubMenuVendas.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.event.InputEvent.CTRL_MASK));
         jSubMenuVendas.setText("Vendas");
+        jSubMenuVendas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jSubMenuVendasActionPerformed(evt);
+            }
+        });
         jMenuVendasFunc.add(jSubMenuVendas);
 
         jMenuAdm.add(jMenuVendasFunc);
@@ -83,20 +98,26 @@ public class VisaoPrincipal_Vendedores extends javax.swing.JFrame {
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(33, 33, 33)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
                 .addGap(109, 109, 109))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(163, 163, 163)
-                .addComponent(jLabel3)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(20, Short.MAX_VALUE)
-                .addComponent(jLabel3)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 425, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 425, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 425, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -105,8 +126,15 @@ public class VisaoPrincipal_Vendedores extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jSubMenuVendasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSubMenuVendasActionPerformed
+        // TODO add your handling code here:
+        CadastroVendasListagem dialog = new CadastroVendasListagem(this, true, v);
+        dialog.setVisible(true);
+    }//GEN-LAST:event_jSubMenuVendasActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JMenuBar jMenuAdm;
     private javax.swing.JMenu jMenuVendasFunc;
@@ -139,7 +167,7 @@ public class VisaoPrincipal_Vendedores extends javax.swing.JFrame {
         int sem = hora.get(Calendar.DAY_OF_WEEK);
         String semana = "";
         switch (sem){
-            case 0: semana = "Sábado";break;
+            case 7: semana = "Sábado";break;
             case 1: semana = "Domingo";break;
             case 2: semana = "Segunda-feira";break;
             case 3: semana = "Terça-feira";break;

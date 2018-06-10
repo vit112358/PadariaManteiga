@@ -263,6 +263,10 @@ public class CadastroProducaoInclui extends javax.swing.JDialog {
         itens.forEach((iten) -> {
             iten.setProducao(p);
         });
+        
+        itens.forEach((iten) -> {
+            pService.UpdateEstoqueProducao(iten.getProd(), iten.getQtde());
+        });
 
         for (int i = 0; i < p.getProdutos_feitos().size(); i++) {
             p.getProdutos_feitos().get(i).getProd().setEstoque(
@@ -275,6 +279,7 @@ public class CadastroProducaoInclui extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
 
+        setVisible(false);
     }//GEN-LAST:event_jBtnSalvaActionPerformed
 
     private void jBtnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirActionPerformed
@@ -338,7 +343,8 @@ public class CadastroProducaoInclui extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void atualizaDados() {
-        iProducao = new itensProducaoTableModel(itens);
+        String[] cols = {"Nome", "Quantidade"};
+        iProducao = new itensProducaoTableModel(itens,cols);
         jTableProdutos.setModel(iProducao);
     }
 }
