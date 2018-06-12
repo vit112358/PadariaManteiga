@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.5.1.final using JasperReports Library version 6.5.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Relatório_Venda_Código" pageWidth="595" pageHeight="842" whenNoDataType="NoDataSection" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" whenResourceMissingType="Empty" uuid="562befb2-7917-40de-85bc-27ac7d171524">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter (2)"/>
+	<property name="com.jaspersoft.studio.report.description" value=""/>
+	<parameter name="codigoVendedor" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[$P{codigoVendedor}]]></defaultValueExpression>
+	</parameter>
+	<queryString language="SQL">
+		<![CDATA[SELECT *
+FROM funcionario
+WHERE 
+	ID = $P{codigoVendedor}]]>
+	</queryString>
+	<field name="ID" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="ID"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="funcionario"/>
+	</field>
+	<field name="TIPO" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="TIPO"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="funcionario"/>
+	</field>
+	<field name="IDADE" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="IDADE"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="funcionario"/>
+	</field>
+	<field name="NOME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="NOME"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="funcionario"/>
+	</field>
+	<field name="LOGIN" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="LOGIN"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="funcionario"/>
+	</field>
+	<field name="SENHA" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="SENHA"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="funcionario"/>
+	</field>
+	<field name="DATAADMISSÃO" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.label" value="DATAADMISSÃO"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="funcionario"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="40" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="450" height="21" uuid="b87efd4a-9dc8-4e56-8a48-8850baad7388"/>
+				<textElement rotation="None" markup="styled">
+					<font fontName="Adobe Arabic" size="14" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Sistemas de Padaria - Chega Manteiga Derrete]]></text>
+			</staticText>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="475" y="0" width="100" height="21" uuid="00c88491-cd35-44fc-8cba-171854724786"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="19" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="50" height="19" uuid="005ab01e-52f8-4c4d-b060-31324f766e36"/>
+				<text><![CDATA[Código]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="60" y="0" width="60" height="18" uuid="24eb5d5f-ea73-4603-9f3f-addbe036c140"/>
+				<text><![CDATA[Tipo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="150" y="0" width="80" height="18" uuid="23dbc059-e3d8-41e3-843e-b50e0ce73acf"/>
+				<text><![CDATA[Nome]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="270" y="0" width="100" height="18" uuid="b320149a-c22b-4089-8efc-c21238f5535a"/>
+				<text><![CDATA[Idade]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="400" y="0" width="100" height="18" uuid="371b2712-cc8d-43d1-a19b-ddacf2efe03d"/>
+				<text><![CDATA[Data de Admissão]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="53" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="50" height="18" uuid="8feb634a-1b84-46bf-90ed-f24746bdea73"/>
+				<textFieldExpression><![CDATA[$F{ID}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="60" y="0" width="80" height="18" uuid="16dd01b2-355d-4895-abce-c6472b76c936"/>
+				<textFieldExpression><![CDATA[$F{TIPO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="150" y="0" width="100" height="18" uuid="755d325e-3fc3-41c8-bcbf-be6631ee7f34"/>
+				<textFieldExpression><![CDATA[$F{NOME}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="270" y="0" width="100" height="18" uuid="e4662bb5-b745-4110-a2c2-f40c62468116"/>
+				<textFieldExpression><![CDATA[$F{IDADE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="400" y="1" width="100" height="18" uuid="8dd64ca5-a964-4e0a-871b-a014a97d3b0e"/>
+				<textFieldExpression><![CDATA[$F{DATAADMISSÃO}]]></textFieldExpression>
+			</textField>
+			<subreport>
+				<reportElement x="60" y="18" width="249" height="35" uuid="b0629e18-8d27-404b-aa6a-c64a1aac0798"/>
+				<subreportParameter name="codigoVendedor">
+					<subreportParameterExpression><![CDATA[$P{codigoVendedor}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["Venda_Codigo_Detalhe.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="20">
+			<textField>
+				<reportElement x="510" y="1" width="100" height="19" uuid="57f1fc64-0a1f-42e6-8a45-6d7b365e6d3d"/>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

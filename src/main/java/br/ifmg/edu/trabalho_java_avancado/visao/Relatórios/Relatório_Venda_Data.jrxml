@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.5.1.final using JasperReports Library version 6.5.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Relatório_Venda_Geral" pageWidth="595" pageHeight="842" whenNoDataType="NoDataSection" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" whenResourceMissingType="Empty" uuid="562befb2-7917-40de-85bc-27ac7d171524">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter (2)"/>
+	<parameter name="DataInicio" class="java.sql.Date" evaluationTime="Early">
+		<defaultValueExpression><![CDATA[$P{DataInicio}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="DataFim" class="java.sql.Date">
+		<defaultValueExpression><![CDATA[$P{DataFim}]]></defaultValueExpression>
+	</parameter>
+	<queryString language="SQL">
+		<![CDATA[SELECT *
+FROM venda
+	inner join funcionario ON 
+	  ( 
+	 venda.`codVendedor` = funcionario.`ID`) 
+WHERE 
+	 venda.`DATAVENDA` > $P{DataInicio} 
+	 AND venda.`DATAVENDA` < $P{DataFim}]]>
+	</queryString>
+	<field name="Venda_Id" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="Venda_Id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="venda"/>
+	</field>
+	<field name="DATAVENDA" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.label" value="DATAVENDA"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="venda"/>
+	</field>
+	<field name="PRECOVENDA" class="java.lang.Float">
+		<property name="com.jaspersoft.studio.field.label" value="PRECOVENDA"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="venda"/>
+	</field>
+	<field name="codVendedor" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="codVendedor"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="venda"/>
+	</field>
+	<field name="NOME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="NOME"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="funcionario"/>
+	</field>
+	<variable name="Soma_Valores" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{PRECOVENDA}]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="42" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="450" height="21" uuid="b87efd4a-9dc8-4e56-8a48-8850baad7388"/>
+				<textElement rotation="None" markup="styled">
+					<font fontName="Adobe Arabic" size="14" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Sistemas de Padaria - Chega Manteiga Derrete]]></text>
+			</staticText>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="460" y="0" width="100" height="21" uuid="00c88491-cd35-44fc-8cba-171854724786"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="460" y="27" width="50" height="15" uuid="745800e4-6703-4919-b6f6-13cab8e82f01"/>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="20" uuid="9e6963f9-5620-4016-a1aa-d968c89a1ff0"/>
+				<text><![CDATA[Código da Venda]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="110" y="0" width="100" height="20" uuid="85d17a60-b404-45d2-81f7-43e244d3322a"/>
+				<text><![CDATA[Data da Venda]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="220" y="0" width="100" height="20" uuid="5a186e37-65aa-4cce-92d9-ef608a9d8e6a"/>
+				<text><![CDATA[Valor da Venda]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="330" y="0" width="100" height="20" uuid="0e8fe710-89fb-4d25-8708-cb54f1d92e4e"/>
+				<text><![CDATA[Nome do Vendedor]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="21" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="100" height="20" uuid="cd4699ab-ba80-40fb-911c-2b0f8070a1ad"/>
+				<textFieldExpression><![CDATA[$F{Venda_Id}]]></textFieldExpression>
+			</textField>
+			<textField pattern="MMMM d, yyyy">
+				<reportElement x="110" y="0" width="100" height="20" uuid="153dce4d-666e-4426-b304-772fd7c84566"/>
+				<textFieldExpression><![CDATA[$F{DATAVENDA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="220" y="0" width="100" height="20" uuid="1ba21df8-a1d1-49e1-8879-f7f15046289e"/>
+				<textFieldExpression><![CDATA[$F{PRECOVENDA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="330" y="0" width="100" height="20" uuid="80b0649d-1b16-42e3-95e8-1f02de921ef4"/>
+				<textElement>
+					<paragraph lineSpacing="AtLeast"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NOME}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="19" width="560" height="1" uuid="c1ceed35-bfda-4925-aa8d-326adcef0347"/>
+			</line>
+		</band>
+	</detail>
+	<lastPageFooter>
+		<band height="32">
+			<staticText>
+				<reportElement x="110" y="6" width="100" height="20" uuid="de83023f-00c5-4422-96e6-5100d6efdc90"/>
+				<text><![CDATA[Total de Vendas]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="220" y="6" width="90" height="20" uuid="5e29a107-0082-4f62-896a-7d4384a652df"/>
+				<textFieldExpression><![CDATA["R$" + $V{Soma_Valores}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="0" width="560" height="1" uuid="76958070-04e1-4edb-a8d1-601684294248"/>
+			</line>
+		</band>
+	</lastPageFooter>
+</jasperReport>
