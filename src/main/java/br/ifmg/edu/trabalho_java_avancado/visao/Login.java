@@ -207,22 +207,21 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBtnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExitActionPerformed
-        // TODO add your handling code here:
         setVisible(false);
         System.exit(0);
     }//GEN-LAST:event_jBtnExitActionPerformed
 
     private void jBtnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnLoginActionPerformed
-        // TODO add your handling code here:
         
         boolean Validado = false;
+        
         if(jRadioAdm.isSelected()){
-            //System.out.println("Adm");
-            
-            AdmService aService = new AdmService();
+
+            AdmService admService = new AdmService();
+
             Adm a = new Adm();
             try {
-                a = aService.loginValido(jTxtLogin.getText(), new String(jTxtPwd.getPassword()));
+                a = admService.loginValido(jTxtLogin.getText(), new String(jTxtPwd.getPassword()));
                 Validado = true;
             } catch (NegocioException ex) {
                 Validado = false;
@@ -232,16 +231,13 @@ public class Login extends javax.swing.JFrame {
             }
             
             if (!Validado) {
-                //System.out.println("Não existe esse Usuário cadastre alguém");
-                JOptionPane.showMessageDialog(this, "Não existe esse Usuário! Tente novamente ou cadastre alguém.");
+                JOptionPane.showMessageDialog(this, "Não existe esse Usuário! Tente novamente ou cadastre alguém.", "Erro", JOptionPane.ERROR_MESSAGE);
             }else{
                 VisaoPrincipal_Adm visao = new VisaoPrincipal_Adm(a);
                 setVisible(false);
                 visao.setVisible(true);
-                //System.out.println("Lhegal");
             }
         }else if (jRadioFunc.isSelected()) {
-            System.out.println("Funcionario");
             VendedorService aService = new VendedorService();
             Vendedor v= new Vendedor();
             
@@ -256,18 +252,15 @@ public class Login extends javax.swing.JFrame {
             }
             
             if (!Validado) {
-                System.out.println("Não existe esse Usuário cadastre alguém");
+                JOptionPane.showMessageDialog(this, "Não existe esse Usuário! Tente novamente ou cadastre alguém.", "Erro", JOptionPane.ERROR_MESSAGE);
             }else{
                 VisaoPrincipal_Vendedores visao = new VisaoPrincipal_Vendedores(v);
                 setVisible(false);
                 visao.setVisible(true);
-                //System.out.println("Lhegal");
             }
         }else{
             System.out.println("Escolha um Funcionário");
-        }
-        
-        //setVisible(false);
+        }    
     }//GEN-LAST:event_jBtnLoginActionPerformed
 
     private void jRadioFuncAncestorMoved(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jRadioFuncAncestorMoved

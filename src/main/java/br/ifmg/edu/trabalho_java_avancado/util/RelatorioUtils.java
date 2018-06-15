@@ -31,7 +31,7 @@ public class RelatorioUtils {
         JasperPrint jp = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            mySQLConnection = DriverManager.getConnection("jdbc:mysql://localhost:3306/padaria-java", "root", "1234");
+            mySQLConnection = DriverManager.getConnection("jdbc:mysql://localhost:3306/padaria-java", "root", "root");
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(RelatorioVenda.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -79,7 +79,7 @@ public class RelatorioUtils {
         JasperPrint jp = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            mySQLConnection = DriverManager.getConnection("jdbc:mysql://localhost:3306/padaria-java", "root", "1234");
+            mySQLConnection = DriverManager.getConnection("jdbc:mysql://localhost:3306/padaria-java", "root", "root");
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(RelatorioVenda.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -103,7 +103,7 @@ public class RelatorioUtils {
         JasperPrint jp = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            mySQLConnection = DriverManager.getConnection("jdbc:mysql://localhost:3306/padaria-java", "root", "1234");
+            mySQLConnection = DriverManager.getConnection("jdbc:mysql://localhost:3306/padaria-java", "root", "root");
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(RelatorioVenda.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -151,14 +151,13 @@ public class RelatorioUtils {
         JasperPrint jp = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            mySQLConnection = DriverManager.getConnection("jdbc:mysql://localhost:3306/padaria-java", "root", "1234");
+            mySQLConnection = DriverManager.getConnection("jdbc:mysql://localhost:3306/padaria-java", "root", "root");
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(RelatorioVenda.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         InputStream relatorio = RelatorioVenda.class.getResourceAsStream(resource);
-        //Map<String, Object> parameters = new LinkedHashMap<>();
-        //parameters.put("ParametersInativo", Boolean.TRUE);
+
         try {
             jp = JasperFillManager.fillReport(relatorio, parametros, mySQLConnection);
         } catch (JRException ex) {
@@ -169,27 +168,4 @@ public class RelatorioUtils {
         viewer.show();
     }
     
-    public void VisualizaRelatorioParametroDetalhe(String resource, HashMap<String, Object> parametros, String detalhe){
-        Connection mySQLConnection = null;
-        JasperPrint jp = null;
-        
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-            mySQLConnection = DriverManager.getConnection("jdbc:mysql://localhost:3306/padaria-java", "root", "1234");
-        } catch (ClassNotFoundException | SQLException ex) {
-            Logger.getLogger(RelatorioVenda.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        InputStream Reldetalhe = RelatorioVenda.class.getResourceAsStream(detalhe);
-        InputStream relatorio = RelatorioVenda.class.getResourceAsStream(resource);
-        //Map<String, Object> parameters = new LinkedHashMap<>();
-        //parameters.put("ParametersInativo", Boolean.TRUE);
-        try {
-            jp = JasperFillManager.fillReport(relatorio, parametros,mySQLConnection);
-        } catch (JRException ex) {
-            Logger.getLogger(RelatorioVenda.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        JasperViewer viewer = new JasperViewer(jp, false);
-        viewer.show();
-    }
 }

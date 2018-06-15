@@ -334,7 +334,7 @@ public class CadastroVendasInclui extends javax.swing.JDialog {
     private void jBtnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSalvarActionPerformed
         if (itens.isEmpty()) {
             JOptionPane.showMessageDialog(this,
-                    "Não Existem Produtos Nesta Venda");
+                    "Não Existem Produtos Nesta Venda", "Aviso", JOptionPane.WARNING_MESSAGE);
             return;
         }
 

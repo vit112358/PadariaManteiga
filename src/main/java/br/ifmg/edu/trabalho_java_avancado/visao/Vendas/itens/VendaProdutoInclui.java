@@ -182,21 +182,30 @@ public class VendaProdutoInclui extends javax.swing.JDialog {
         VendaProduto p = new VendaProduto();
         Produto aux = (Produto) jCbxProdutos.getSelectedItem();
         p.setProduto(aux);
-        
-        if(Integer.parseInt(jfmtValor.getText())<=0){
+
+        if (Integer.parseInt(jfmtValor.getText()) <= 0) {
             JOptionPane.showMessageDialog(this, "Para"
-                        + " cadastrar uma venda a quantidade deve ser maior "
-                        + "ou que zero!", "Erro", JOptionPane.ERROR_MESSAGE);
-                return;
+                    + " cadastrar uma venda a quantidade deve ser maior "
+                    + "ou que zero!", "Erro", JOptionPane.ERROR_MESSAGE);
+            return;
         }
-        
+
         p.setQtde(Integer.parseInt(jfmtValor.getText()));
         p.setValor(aux.getPrecoVenda());
-        p.setTotal(aux.getPrecoVenda()*Integer.parseInt(jfmtValor.getText()));
-        
+        p.setTotal(aux.getPrecoVenda() * Integer.parseInt(jfmtValor.getText()));
 
-        produtos.add(p);
-        setVisible(false);
+        if (p.getProduto().getEstoque() - p.getQtde() > p.getProduto().getEstoqueMin()) {
+            produtos.add(p);
+            setVisible(false);
+        } else if ((p.getProduto().getEstoque() - p.getQtde() < p.getProduto().getEstoqueMin())
+                && (p.getProduto().getEstoque() - p.getQtde() > 0)) {
+            JOptionPane.showMessageDialog(this, "Verifique o Estoque, talvez seja necessário fazer reposição!", "Aviso", JOptionPane.WARNING_MESSAGE);
+            produtos.add(p);
+            setVisible(false);
+        } else {
+            JOptionPane.showMessageDialog(this, "Quantidade indisponível no estoque!", "Aviso", JOptionPane.WARNING_MESSAGE);
+        }
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
 

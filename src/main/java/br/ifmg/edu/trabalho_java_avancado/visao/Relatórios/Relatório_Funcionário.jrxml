@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.5.1.final using JasperReports Library version 6.5.1  -->
+<!-- Created with Jaspersoft Studio version 6.4.3.final using JasperReports Library version 6.4.3  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Relatório_Funcionário" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" whenResourceMissingType="Empty" uuid="029dcd68-c4e1-414d-befe-9960381ee0e0">
 	<property name="com.jaspersoft.studio.data.sql.tables" value="ZnVuY2lvbmFyaW8gLDE1LDE1LDU0NTc2ZTFkLTE1YzEtNGVjNC05Y2I4LWY3ZmUxMGFhZGE1ZTs="/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter (2)"/>
@@ -43,7 +43,7 @@ FROM funcionario]]>
 			<staticText>
 				<reportElement x="0" y="0" width="450" height="21" uuid="c82ea21c-d625-4627-9a96-45679727fc42"/>
 				<textElement rotation="None" markup="styled">
-					<font fontName="Adobe Arabic" size="14" isBold="false"/>
+					<font fontName="SansSerif" size="14" isBold="false"/>
 				</textElement>
 				<text><![CDATA[Sistemas de Padaria - Chega Manteiga Derrete]]></text>
 			</staticText>

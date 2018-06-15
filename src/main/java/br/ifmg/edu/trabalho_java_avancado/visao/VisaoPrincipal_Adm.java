@@ -8,7 +8,12 @@ import br.ifmg.edu.trabalho_java_avancado.visao.CadastroVendedores.CadastroVende
 import br.ifmg.edu.trabalho_java_avancado.visao.CadastroFornecedor.CadastroFornecedorListagem;
 import br.ifmg.edu.trabalho_java_avancado.visao.CadastroProdProduzidos.CadastroProdProduzidosListagem;
 import br.ifmg.edu.trabalho_java_avancado.visao.Producao.CadastroProducaoListagem;
+import br.ifmg.edu.trabalho_java_avancado.visao.Relatórios.RelatorioFornecedores;
 import br.ifmg.edu.trabalho_java_avancado.visao.Relatórios.RelatorioFuncionarios;
+import br.ifmg.edu.trabalho_java_avancado.visao.Relatórios.RelatorioMateriaPrima;
+import br.ifmg.edu.trabalho_java_avancado.visao.Relatórios.RelatorioProdProduzidos;
+import br.ifmg.edu.trabalho_java_avancado.visao.Relatórios.RelatorioProdTerceirizados;
+import br.ifmg.edu.trabalho_java_avancado.visao.Relatórios.RelatorioProducao;
 import br.ifmg.edu.trabalho_java_avancado.visao.Relatórios.RelatorioVenda;
 import br.ifmg.edu.trabalho_java_avancado.visao.Vendas.CadastroVendasListagem;
 import java.awt.event.ActionEvent;
@@ -31,9 +36,7 @@ public class VisaoPrincipal_Adm extends javax.swing.JFrame {
     
     public VisaoPrincipal_Adm(Adm vendedor) {
         initComponents();
-        
         this.a = vendedor;
-        
         Timer timer = new Timer(1000,ativar);
         timer.start();
     }
@@ -51,6 +54,7 @@ public class VisaoPrincipal_Adm extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jlblHora = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         jMenuAdm = new javax.swing.JMenuBar();
         jMenuCadastro = new javax.swing.JMenu();
         jSubMenuAdm = new javax.swing.JMenuItem();
@@ -71,7 +75,7 @@ public class VisaoPrincipal_Adm extends javax.swing.JFrame {
         jMIProdProduzidos = new javax.swing.JMenuItem();
         jMIProdTerceirizados = new javax.swing.JMenuItem();
         jMIVenda = new javax.swing.JMenuItem();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        jMIProducao = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistema De Padaria");
@@ -101,6 +105,13 @@ public class VisaoPrincipal_Adm extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Trajan Pro", 1, 18)); // NOI18N
         jLabel3.setText("Panificadora Chega Manteiga,Derrete!");
         jLabel3.setToolTipText("");
+
+        jButton1.setText("Log out");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jMenuCadastro.setText("Cadastros");
 
@@ -175,7 +186,7 @@ public class VisaoPrincipal_Adm extends javax.swing.JFrame {
 
         jMenuVendas.setText("Vendas");
 
-        jSubMenuVenda.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.event.InputEvent.CTRL_MASK));
+        jSubMenuVenda.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.event.InputEvent.ALT_MASK | java.awt.event.InputEvent.CTRL_MASK));
         jSubMenuVenda.setText("Vendas");
         jSubMenuVenda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -199,15 +210,35 @@ public class VisaoPrincipal_Adm extends javax.swing.JFrame {
         jMenuListagens.add(jMIAdm);
 
         jMIFornecedores.setText("Fornecedores");
+        jMIFornecedores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMIFornecedoresActionPerformed(evt);
+            }
+        });
         jMenuListagens.add(jMIFornecedores);
 
         jMIMP.setText("Matérias-Primas");
+        jMIMP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMIMPActionPerformed(evt);
+            }
+        });
         jMenuListagens.add(jMIMP);
 
         jMIProdProduzidos.setText("Produtos Produzidos");
+        jMIProdProduzidos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMIProdProduzidosActionPerformed(evt);
+            }
+        });
         jMenuListagens.add(jMIProdProduzidos);
 
         jMIProdTerceirizados.setText("Produtos Terceirizados");
+        jMIProdTerceirizados.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMIProdTerceirizadosActionPerformed(evt);
+            }
+        });
         jMenuListagens.add(jMIProdTerceirizados);
 
         jMenuRelatorios.add(jMenuListagens);
@@ -221,9 +252,14 @@ public class VisaoPrincipal_Adm extends javax.swing.JFrame {
         });
         jMenuRelatorios.add(jMIVenda);
 
-        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem1.setText("Produções");
-        jMenuRelatorios.add(jMenuItem1);
+        jMIProducao.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
+        jMIProducao.setText("Produções");
+        jMIProducao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMIProducaoActionPerformed(evt);
+            }
+        });
+        jMenuRelatorios.add(jMIProducao);
 
         jMenuAdm.add(jMenuRelatorios);
 
@@ -239,15 +275,19 @@ public class VisaoPrincipal_Adm extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(109, 109, 109))
             .addGroup(layout.createSequentialGroup()
-                .addGap(152, 152, 152)
+                .addContainerGap()
+                .addComponent(jButton1)
+                .addGap(69, 69, 69)
                 .addComponent(jLabel3)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(20, Short.MAX_VALUE)
-                .addComponent(jLabel3)
+                .addContainerGap(12, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jButton1))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 425, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -264,7 +304,6 @@ public class VisaoPrincipal_Adm extends javax.swing.JFrame {
     }//GEN-LAST:event_jSubMenuVendedorActionPerformed
 
     private void jSubMenuFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSubMenuFornecedorActionPerformed
-        // TODO add your handling code here:
         CadastroFornecedorListagem dialog = new CadastroFornecedorListagem(this, true);
         dialog.setVisible(true);
     }//GEN-LAST:event_jSubMenuFornecedorActionPerformed
@@ -305,12 +344,43 @@ public class VisaoPrincipal_Adm extends javax.swing.JFrame {
     }//GEN-LAST:event_jMIVendaActionPerformed
 
     private void jMIAdmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIAdmActionPerformed
-        // TODO add your handling code here:
         RelatorioFuncionarios dialog = new RelatorioFuncionarios(this, false);
         dialog.setVisible(true);
     }//GEN-LAST:event_jMIAdmActionPerformed
 
+    private void jMIProducaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIProducaoActionPerformed
+        RelatorioProducao dialog = new RelatorioProducao(this, false);
+        dialog.setVisible(true);
+    }//GEN-LAST:event_jMIProducaoActionPerformed
+
+    private void jMIFornecedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIFornecedoresActionPerformed
+        RelatorioFornecedores dialog = new RelatorioFornecedores(this, false);
+        dialog.setVisible(true);
+    }//GEN-LAST:event_jMIFornecedoresActionPerformed
+
+    private void jMIMPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIMPActionPerformed
+        RelatorioMateriaPrima dialog = new RelatorioMateriaPrima(this, false);
+        dialog.setVisible(true);
+    }//GEN-LAST:event_jMIMPActionPerformed
+
+    private void jMIProdProduzidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIProdProduzidosActionPerformed
+        RelatorioProdProduzidos dialog = new RelatorioProdProduzidos(this, false);
+        dialog.setVisible(true);
+    }//GEN-LAST:event_jMIProdProduzidosActionPerformed
+
+    private void jMIProdTerceirizadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIProdTerceirizadosActionPerformed
+        RelatorioProdTerceirizados dialog = new RelatorioProdTerceirizados(this, false);
+        dialog.setVisible(true);
+    }//GEN-LAST:event_jMIProdTerceirizadosActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        Login login = new Login();
+        this.setVisible(false);
+        login.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JMenuItem jMIAdm;
@@ -318,10 +388,10 @@ public class VisaoPrincipal_Adm extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMIMP;
     private javax.swing.JMenuItem jMIProdProduzidos;
     private javax.swing.JMenuItem jMIProdTerceirizados;
+    private javax.swing.JMenuItem jMIProducao;
     private javax.swing.JMenuItem jMIVenda;
     private javax.swing.JMenuBar jMenuAdm;
     private javax.swing.JMenu jMenuCadastro;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenu jMenuListagens;
     private javax.swing.JMenu jMenuProducao;
     private javax.swing.JMenu jMenuRelatorios;

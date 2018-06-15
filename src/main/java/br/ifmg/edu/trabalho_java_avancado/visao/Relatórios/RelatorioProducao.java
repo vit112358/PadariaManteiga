@@ -12,7 +12,7 @@ import javax.swing.JOptionPane;
  *
  * @author Vitor
  */
-public class RelatorioVenda extends javax.swing.JDialog {
+public class RelatorioProducao extends javax.swing.JDialog {
 
     private RelatorioUtils util;
 
@@ -22,7 +22,7 @@ public class RelatorioVenda extends javax.swing.JDialog {
      * @param parent Janela Pai
      * @param modal Para definir se é modal ou não
      */
-    public RelatorioVenda(java.awt.Frame parent, boolean modal) {
+    public RelatorioProducao(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         util = new RelatorioUtils();
@@ -39,8 +39,6 @@ public class RelatorioVenda extends javax.swing.JDialog {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel2 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jTxtCodVendedor = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -58,8 +56,6 @@ public class RelatorioVenda extends javax.swing.JDialog {
         setTitle("Sistema de Padaria");
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Filtros"));
-
-        jLabel1.setText("Código do Vendedor:");
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Filtro por Data:"));
 
@@ -86,7 +82,7 @@ public class RelatorioVenda extends javax.swing.JDialog {
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jFmtDataFim, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(71, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -122,7 +118,7 @@ public class RelatorioVenda extends javax.swing.JDialog {
                         .addGroup(jPanel4Layout.createSequentialGroup()
                             .addGap(10, 10, 10)
                             .addComponent(jRadioPDF, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 202, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -143,24 +139,17 @@ public class RelatorioVenda extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTxtCodVendedor, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jTxtCodVendedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addContainerGap()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -221,7 +210,7 @@ public class RelatorioVenda extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        setSize(new java.awt.Dimension(363, 351));
+        setSize(new java.awt.Dimension(363, 347));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -234,7 +223,7 @@ public class RelatorioVenda extends javax.swing.JDialog {
 
         Date data1 = null;
         Date data2 = null;
-        if ((jTxtCodVendedor.getText().equals("") || jTxtCodVendedor.getText().trim().equals(""))
+        /*if ((jTxtCodVendedor.getText().equals("") || jTxtCodVendedor.getText().trim().equals(""))
                 && (jFmtDataFim.getText().equals("") || jFmtDataFim.getText().trim().equals(""))
                 && (jFmtDataInício.getText().equals("") || jFmtDataInício.getText().trim().equals(""))) {
             if (jRadioVis.isSelected()) {
@@ -255,7 +244,7 @@ public class RelatorioVenda extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(this, "Digite um Código válido!", "Erro", JOptionPane.ERROR_MESSAGE);
                 return;
             }
-            String path = RelatorioVenda.class.getResource("Venda_Codigo_Detalhe.jasper").getPath();
+            String path = RelatorioProducao.class.getResource("Venda_Codigo_Detalhe.jasper").getPath();
             System.out.println(path);
             HashMap<String, Object> parametros = new LinkedHashMap<>();
             parametros.put("codigoVendedor", codigo);
@@ -341,12 +330,10 @@ public class RelatorioVenda extends javax.swing.JDialog {
             } else {
                 JOptionPane.showMessageDialog(this, "Escolha um modo de Visualização", "Erro", JOptionPane.ERROR_MESSAGE);
             }
-        }
+        }*/
     }//GEN-LAST:event_jBtnGeraActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -361,15 +348,16 @@ public class RelatorioVenda extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(RelatorioVenda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RelatorioProducao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(() -> {
-            RelatorioVenda dialog = new RelatorioVenda(new javax.swing.JFrame(), true);
+            RelatorioProducao dialog = new RelatorioProducao(new javax.swing.JFrame(), true);
             dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                 @Override
                 public void windowClosing(java.awt.event.WindowEvent e) {
@@ -386,7 +374,6 @@ public class RelatorioVenda extends javax.swing.JDialog {
     private javax.swing.JButton jBtnGera;
     private javax.swing.JFormattedTextField jFmtDataFim;
     private javax.swing.JFormattedTextField jFmtDataInício;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -396,6 +383,5 @@ public class RelatorioVenda extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JRadioButton jRadioPDF;
     private javax.swing.JRadioButton jRadioVis;
-    private javax.swing.JTextField jTxtCodVendedor;
     // End of variables declaration//GEN-END:variables
 }
