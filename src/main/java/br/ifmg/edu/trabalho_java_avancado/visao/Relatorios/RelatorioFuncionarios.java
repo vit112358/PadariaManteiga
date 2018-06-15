@@ -1,4 +1,4 @@
-package br.ifmg.edu.trabalho_java_avancado.visao.Relatórios;
+package br.ifmg.edu.trabalho_java_avancado.visao.Relatorios;
 
 import br.ifmg.edu.trabalho_java_avancado.util.RelatorioUtils;
 import java.sql.Date;

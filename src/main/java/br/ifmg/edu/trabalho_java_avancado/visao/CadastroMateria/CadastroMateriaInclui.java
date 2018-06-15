@@ -231,6 +231,7 @@ public class CadastroMateriaInclui extends javax.swing.JDialog {
 
         try {
             mService.salvar(f);
+            setVisible(false);
         } catch (NegocioException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }

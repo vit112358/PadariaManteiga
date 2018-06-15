@@ -1,4 +1,4 @@
-package br.ifmg.edu.trabalho_java_avancado.visao.Relatórios;
+package br.ifmg.edu.trabalho_java_avancado.visao.Relatorios;
 
 import br.ifmg.edu.trabalho_java_avancado.util.RelatorioUtils;
 import java.sql.Date;
@@ -12,7 +12,7 @@ import javax.swing.JOptionPane;
  *
  * @author Vitor
  */
-public class RelatorioProdTerceirizados extends javax.swing.JDialog {
+public class RelatorioProdProduzidos extends javax.swing.JDialog {
 
     private RelatorioUtils util;
 
@@ -22,7 +22,7 @@ public class RelatorioProdTerceirizados extends javax.swing.JDialog {
      * @param parent Janela Pai
      * @param modal Para definir se é modal ou não
      */
-    public RelatorioProdTerceirizados(java.awt.Frame parent, boolean modal) {
+    public RelatorioProdProduzidos(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         util = new RelatorioUtils();
@@ -44,8 +44,6 @@ public class RelatorioProdTerceirizados extends javax.swing.JDialog {
         jLabel4 = new javax.swing.JLabel();
         jRadioPDF = new javax.swing.JRadioButton();
         jRadioVis = new javax.swing.JRadioButton();
-        jLabel1 = new javax.swing.JLabel();
-        jTxtCodForn = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         jBtnGera = new javax.swing.JButton();
         jBtnFecha = new javax.swing.JButton();
@@ -88,33 +86,21 @@ public class RelatorioProdTerceirizados extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jLabel1.setText("Código do Fornecedor: ");
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTxtCodForn, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jTxtCodForn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -175,7 +161,7 @@ public class RelatorioProdTerceirizados extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        setSize(new java.awt.Dimension(363, 264));
+        setSize(new java.awt.Dimension(363, 238));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -284,7 +270,7 @@ public class RelatorioProdTerceirizados extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(RelatorioProdTerceirizados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RelatorioProdProduzidos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -299,7 +285,7 @@ public class RelatorioProdTerceirizados extends javax.swing.JDialog {
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(() -> {
-            RelatorioProdTerceirizados dialog = new RelatorioProdTerceirizados(new javax.swing.JFrame(), true);
+            RelatorioProdProduzidos dialog = new RelatorioProdProduzidos(new javax.swing.JFrame(), true);
             dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                 @Override
                 public void windowClosing(java.awt.event.WindowEvent e) {
@@ -315,13 +301,11 @@ public class RelatorioProdTerceirizados extends javax.swing.JDialog {
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JButton jBtnFecha;
     private javax.swing.JButton jBtnGera;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JRadioButton jRadioPDF;
     private javax.swing.JRadioButton jRadioVis;
-    private javax.swing.JTextField jTxtCodForn;
     // End of variables declaration//GEN-END:variables
 }

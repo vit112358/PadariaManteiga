@@ -1,6 +1,6 @@
 package br.ifmg.edu.trabalho_java_avancado.util;
 
-import br.ifmg.edu.trabalho_java_avancado.visao.Relatórios.RelatorioVenda;
+import br.ifmg.edu.trabalho_java_avancado.visao.Relatorios.RelatorioVenda;
 import java.io.File;
 import java.io.InputStream;
 import java.sql.Connection;
@@ -31,7 +31,7 @@ public class RelatorioUtils {
         JasperPrint jp = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            mySQLConnection = DriverManager.getConnection("jdbc:mysql://localhost:3306/padaria-java", "root", "root");
+            mySQLConnection = DriverManager.getConnection("jdbc:mysql://localhost:3306/padaria-java", "root", "1234");
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(RelatorioVenda.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -79,7 +79,7 @@ public class RelatorioUtils {
         JasperPrint jp = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            mySQLConnection = DriverManager.getConnection("jdbc:mysql://localhost:3306/padaria-java", "root", "root");
+            mySQLConnection = DriverManager.getConnection("jdbc:mysql://localhost:3306/padaria-java", "root", "1234");
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(RelatorioVenda.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -103,7 +103,7 @@ public class RelatorioUtils {
         JasperPrint jp = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            mySQLConnection = DriverManager.getConnection("jdbc:mysql://localhost:3306/padaria-java", "root", "root");
+            mySQLConnection = DriverManager.getConnection("jdbc:mysql://localhost:3306/padaria-java", "root", "1234");
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(RelatorioVenda.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -151,7 +151,7 @@ public class RelatorioUtils {
         JasperPrint jp = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            mySQLConnection = DriverManager.getConnection("jdbc:mysql://localhost:3306/padaria-java", "root", "root");
+            mySQLConnection = DriverManager.getConnection("jdbc:mysql://localhost:3306/padaria-java", "root", "1234");
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(RelatorioVenda.class.getName()).log(Level.SEVERE, null, ex);
         }
